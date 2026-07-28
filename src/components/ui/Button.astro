@@ -1,0 +1,42 @@
+﻿---
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
+}
+
+const { href, variant = "primary", size = "md" } = Astro.props;
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={`inline-flex items-center justify-center rounded-md font-medium transition-colors ${
+        size === "sm" ? "px-3 py-1.5 text-sm" : 
+        size === "lg" ? "px-6 py-3 text-lg" : 
+        "px-4 py-2 text-base"
+      } ${
+        variant === "primary" ? "bg-primary text-primary-fg hover:opacity-90" :
+        variant === "secondary" ? "bg-border text-foreground hover:bg-border/80" :
+        "text-primary hover:underline"
+      }`}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      class={`inline-flex items-center justify-center rounded-md font-medium transition-colors ${
+        size === "sm" ? "px-3 py-1.5 text-sm" : 
+        size === "lg" ? "px-6 py-3 text-lg" : 
+        "px-4 py-2 text-base"
+      } ${
+        variant === "primary" ? "bg-primary text-primary-fg hover:opacity-90" :
+        variant === "secondary" ? "bg-border text-foreground hover:bg-border/80" :
+        "text-primary hover:underline"
+      }`}
+    >
+      <slot />
+    </button>
+  )
+}
