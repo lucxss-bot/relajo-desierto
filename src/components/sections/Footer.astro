@@ -1,9 +1,13 @@
 ﻿---
-const businessName = "Relajo Desierto";
-const whatsapp = "https://wa.me/56912345678";
-const phone = "+56 9 1234 5678";
-const instagram = "https://instagram.com/relajo.desierto";
-const address = "Chamonate, Copiapó, Atacama, Chile";
+import { getSiteSettings } from "../lib/sanity";
+
+const settings = await getSiteSettings();
+
+const whatsappNumber = settings?.whatsappNumber || "56912345678";
+const phoneNumber = settings?.phoneNumber || "+56 9 1234 5678";
+const instagramHandle = settings?.instagramHandle || "relajo.desierto";
+const address = settings?.address || "Chamonate, Copiapó, Atacama, Chile";
+const businessName = settings?.businessName || "Relajo Desierto";
 const year = new Date().getFullYear();
 ---
 
@@ -20,13 +24,13 @@ const year = new Date().getFullYear();
       <div class="space-y-3">
         <h4 class="font-semibold">Contacto</h4>
         <div class="flex flex-col gap-2 text-sm">
-          <a href={whatsapp} class="hover:underline flex items-center gap-2">
+          <a href={`https://wa.me/${whatsappNumber}`} class="hover:underline flex items-center gap-2">
             💬 WhatsApp
           </a>
-          <a href={`tel:${phone}`} class="hover:underline flex items-center gap-2">
+          <a href={`tel:${phoneNumber}`} class="hover:underline flex items-center gap-2">
             📞 Llamar
           </a>
-          <a href={instagram} class="hover:underline flex items-center gap-2">
+          <a href={`https://instagram.com/${instagramHandle}`} class="hover:underline flex items-center gap-2">
             📸 Instagram
           </a>
         </div>

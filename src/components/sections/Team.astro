@@ -1,27 +1,7 @@
 ﻿---
-interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-}
+import { getTeam } from "../lib/sanity";
 
-const team: TeamMember[] = [
-  {
-    name: "Fernanda",
-    role: "Propietaria & Guía",
-    bio: "Apasionada por el bienestar y las experiencias en la naturaleza. Créadora de Relajo Desierto."
-  },
-  {
-    name: "Claudia",
-    role: "Asistente de Experiencias",
-    bio: "Experta en hacer que cada cliente se sienta bienvenido y cuidado."
-  },
-  {
-    name: "Roberto",
-    role: "Mantenimiento & Logística",
-    bio: "Garantiza que todo esté perfecto para tu llegada."
-  }
-];
+const team = await getTeam();
 ---
 
 <section class="py-16 md:py-24 bg-surface px-4">
@@ -32,10 +12,14 @@ const team: TeamMember[] = [
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {team.map((member) => (
+      {team.map((member: any) => (
         <div class="text-center space-y-4">
-          <div class="w-32 h-32 mx-auto bg-border rounded-full flex items-center justify-center text-5xl">
-            👤
+          <div class="w-32 h-32 mx-auto bg-border rounded-full overflow-hidden flex items-center justify-center">
+            {member.imageUrl ? (
+              <img src={member.imageUrl} alt={member.name} class="w-full h-full object-cover" />
+            ) : (
+              <span class="text-5xl">👤</span>
+            )}
           </div>
           <div>
             <h3 class="text-xl font-semibold text-fg">{member.name}</h3>
