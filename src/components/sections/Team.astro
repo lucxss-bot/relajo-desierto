@@ -1,0 +1,49 @@
+﻿---
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+}
+
+const team: TeamMember[] = [
+  {
+    name: "Fernanda",
+    role: "Propietaria & Guía",
+    bio: "Apasionada por el bienestar y las experiencias en la naturaleza. Créadora de Relajo Desierto."
+  },
+  {
+    name: "Claudia",
+    role: "Asistente de Experiencias",
+    bio: "Experta en hacer que cada cliente se sienta bienvenido y cuidado."
+  },
+  {
+    name: "Roberto",
+    role: "Mantenimiento & Logística",
+    bio: "Garantiza que todo esté perfecto para tu llegada."
+  }
+];
+---
+
+<section class="py-16 md:py-24 bg-surface px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center space-y-4 mb-12">
+      <h2 class="text-4xl font-bold text-fg">Quiénes Somos</h2>
+      <p class="text-lg text-fg-muted">Un equipo familiar dedicado a tu bienestar</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {team.map((member) => (
+        <div class="text-center space-y-4">
+          <div class="w-32 h-32 mx-auto bg-border rounded-full flex items-center justify-center text-5xl">
+            👤
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-fg">{member.name}</h3>
+            <p class="text-sm text-primary font-medium">{member.role}</p>
+          </div>
+          <p class="text-fg-muted text-sm">{member.bio}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

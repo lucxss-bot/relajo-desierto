@@ -1,0 +1,56 @@
+﻿---
+interface Service {
+  name: string;
+  description: string;
+  price: number;
+  capacity: number;
+  icon: string;
+}
+
+const services: Service[] = [
+  {
+    name: "Tinaja",
+    description: "Hidromasaje para 6 personas. Incluye tablas y bebestible.",
+    price: 45000,
+    capacity: 6,
+    icon: "🛁"
+  },
+  {
+    name: "Jacuzzi",
+    description: "Hidroburbujas para 2 personas. Experiencia íntima y relajante.",
+    price: 25000,
+    capacity: 2,
+    icon: "💦"
+  },
+  {
+    name: "Cabaña",
+    description: "Alojamiento equipado para 2 + jacuzzi o tinaja incluida. Desayuno cortesía.",
+    price: 120000,
+    capacity: 2,
+    icon: "🏡"
+  }
+];
+---
+
+<section class="py-16 md:py-24 bg-background px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center space-y-4 mb-12">
+      <h2 class="text-4xl font-bold text-fg">Nuestras Experiencias</h2>
+      <p class="text-lg text-fg-muted">Elige la que mejor se adapte a ti</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {services.map((service) => (
+        <div class="rounded-lg border border-border bg-surface p-8 space-y-4 hover:shadow-lg transition-shadow">
+          <div class="text-5xl mb-4">{service.icon}</div>
+          <h3 class="text-2xl font-semibold text-fg">{service.name}</h3>
+          <p class="text-fg-muted">{service.description}</p>
+          <div class="flex justify-between items-center pt-4 border-t border-border">
+            <span class="text-2xl font-bold text-primary">${service.price.toLocaleString()}</span>
+            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">{service.capacity} personas</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
