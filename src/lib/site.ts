@@ -4,6 +4,7 @@
  */
 export const site = {
   name: "Relajo Desierto",
+  slogan: "Donde comienza tu descanso",
   tagline: "Tinaja, jacuzzi y cabaña en el desierto de Atacama",
   description:
     "Tinaja con hidromasaje para 6, jacuzzi para 2 y cabaña equipada con desayuno. A minutos de Copiapó, en pleno desierto de Atacama.",

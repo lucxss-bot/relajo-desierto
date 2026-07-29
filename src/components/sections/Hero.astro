@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { site, whatsappLink } from "../../lib/site";
 import Icon from "../ui/Icon.astro";
+import atardecer from "../../assets/fotos/atardecer-panoramica.jpg";
 
 interface Props {
   headline?: string;
@@ -18,50 +20,35 @@ const highlights = ["Tinaja para 6 personas", "Jacuzzi para 2", "Cabaña con des
 ---
 
 <section class="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden">
-  <!-- Cielo -->
-  <div
-    class="absolute inset-0 -z-30"
-    style="background: linear-gradient(to bottom, #fdf7f0 0%, #fbeee2 45%, #f8e2d0 100%);"
-  >
-  </div>
+  <!-- Foto de fondo -->
+  <Image
+    src={atardecer}
+    alt="Atardecer sobre las cabañas de adobe de Relajo Desierto, en el desierto de Atacama"
+    class="absolute inset-0 -z-20 size-full object-cover"
+    widths={[640, 960, 1280]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
 
-  <!-- Sol -->
-  <div
-    class="absolute -z-20 left-1/2 top-[14%] size-[34rem] -translate-x-1/2 rounded-full sm:size-[44rem]"
-    style="background: radial-gradient(circle, rgba(226,150,98,0.30) 0%, rgba(226,150,98,0.10) 42%, rgba(226,150,98,0) 68%);"
-  >
-  </div>
+  <!-- Velo oscuro para que el texto se lea sobre la foto -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink/80 via-ink/55 to-ink/85" aria-hidden="true"></div>
 
-  <!-- Dunas -->
-  <svg
-    class="absolute inset-x-0 bottom-0 -z-10 h-[38%] w-full sm:h-[42%]"
-    viewBox="0 0 1440 320"
-    preserveAspectRatio="none"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path
-      d="M0,200 C180,150 320,190 520,175 C760,157 900,215 1120,195 C1280,180 1380,205 1440,195 L1440,320 L0,320 Z"
-      fill="#f1ddc9"></path>
-    <path
-      d="M0,245 C200,210 340,255 560,240 C780,225 940,270 1160,250 C1300,237 1390,255 1440,248 L1440,320 L0,320 Z"
-      fill="#e7cbaf"></path>
-    <path
-      d="M0,285 C220,262 400,292 640,283 C880,274 1060,300 1260,290 C1350,285 1410,293 1440,290 L1440,320 L0,320 Z"
-      fill="#dab594"></path>
-  </svg>
-
-  <div class="mx-auto w-full max-w-3xl px-5 pb-32 pt-16 text-center sm:px-6 sm:pb-40">
-    <p class="eyebrow justify-center" data-reveal>
+  <div class="mx-auto w-full max-w-3xl px-5 py-20 text-center sm:px-6">
+    <p class="eyebrow justify-center !text-primary-fg/80 [&::before]:bg-primary-fg/40" data-reveal>
       <Icon name="pin" class="size-3.5" />
       {site.address.locality} · {site.address.city} · {site.address.region}
     </p>
 
-    <h1 class="mt-6 text-fg" data-reveal style="transition-delay: 80ms">
+    <h1 class="mt-6 text-primary-fg" data-reveal style="transition-delay: 80ms">
       {headline}
     </h1>
 
-    <p class="mx-auto mt-6 max-w-xl text-lg text-fg-muted sm:text-xl" data-reveal style="transition-delay: 160ms">
+    <p
+      class="mx-auto mt-6 max-w-xl text-lg text-primary-fg/85 sm:text-xl"
+      data-reveal
+      style="transition-delay: 160ms"
+    >
       {subheadline}
     </p>
 
@@ -74,28 +61,28 @@ const highlights = ["Tinaja para 6 personas", "Jacuzzi para 2", "Cabaña con des
         href={cta}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-7 py-3.5 text-base font-medium text-primary-fg shadow-soft transition-all duration-300 hover:bg-primary-deep hover:shadow-lift active:scale-[0.98] sm:w-auto"
+        class="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-7 py-3.5 text-base font-medium text-primary-fg shadow-lift transition-all duration-300 hover:bg-primary-deep active:scale-[0.98] sm:w-auto"
       >
         <Icon name="whatsapp" class="size-5" />
         Reservar por WhatsApp
       </a>
       <a
         href="#experiencias"
-        class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-fg/15 bg-surface/70 px-7 py-3.5 text-base font-medium text-fg backdrop-blur-sm transition-colors hover:border-primary/40 hover:text-primary-deep sm:w-auto"
+        class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary-fg/35 bg-primary-fg/10 px-7 py-3.5 text-base font-medium text-primary-fg backdrop-blur-sm transition-colors hover:bg-primary-fg/20 sm:w-auto"
       >
         Ver experiencias
       </a>
     </div>
 
     <ul
-      class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-sm text-fg-muted"
+      class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-sm text-primary-fg/80"
       data-reveal
       style="transition-delay: 320ms"
     >
       {
         highlights.map((item) => (
           <li class="inline-flex items-center gap-1.5">
-            <Icon name="check" class="size-4 text-primary" />
+            <Icon name="check" class="size-4 text-primary-fg/60" />
             {item}
           </li>
         ))
@@ -105,7 +92,7 @@ const highlights = ["Tinaja para 6 personas", "Jacuzzi para 2", "Cabaña con des
 
   <a
     href="#experiencias"
-    class="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 text-fg/35 transition-colors hover:text-primary sm:block"
+    class="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 text-primary-fg/50 transition-colors hover:text-primary-fg sm:block"
     aria-label="Ir a las experiencias"
   >
     <Icon name="arrow-down" class="size-5 animate-bounce" />
