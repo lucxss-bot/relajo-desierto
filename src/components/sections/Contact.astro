@@ -1,0 +1,99 @@
+---
+import { site, whatsappLink } from "../../lib/site";
+import Icon from "../ui/Icon.astro";
+
+const cta = whatsappLink(`Hola ${site.name}! Quiero reservar. ¿Qué fechas tienen disponibles?`);
+
+const channels = [
+  {
+    label: "WhatsApp",
+    value: "Respondemos en el día",
+    href: cta,
+    icon: "whatsapp" as const,
+    external: true,
+    primary: true,
+  },
+  {
+    label: "Teléfono",
+    value: site.phoneDisplay,
+    href: site.phoneHref,
+    icon: "phone" as const,
+    external: false,
+  },
+  {
+    label: "Instagram",
+    value: site.instagramHandle,
+    href: site.instagram,
+    icon: "instagram" as const,
+    external: true,
+  },
+];
+---
+
+<section id="contacto" class="relative scroll-mt-20 overflow-hidden bg-ink px-5 py-20 text-primary-fg sm:px-6 sm:py-28">
+  <!-- Resplandor cálido de fondo -->
+  <div
+    class="pointer-events-none absolute left-1/2 top-0 size-[40rem] -translate-x-1/2 -translate-y-1/3 rounded-full"
+    style="background: radial-gradient(circle, rgba(193,89,58,0.30) 0%, rgba(193,89,58,0) 65%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-4xl text-center">
+    <p class="eyebrow justify-center !text-primary-fg/60" data-reveal>Reservas</p>
+
+    <h2 class="mt-5 text-primary-fg" data-reveal style="transition-delay: 70ms">
+      ¿Nos vemos en el desierto?
+    </h2>
+
+    <p class="mx-auto mt-5 max-w-xl text-lg text-primary-fg/70" data-reveal style="transition-delay: 140ms">
+      Escríbenos y coordinamos tu fecha. Sin formularios ni esperas: hablas directo con nosotros.
+    </p>
+
+    <div class="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3" data-reveal style="transition-delay: 210ms">
+      {
+        channels.map((channel) => (
+          <a
+            href={channel.href}
+            target={channel.external ? "_blank" : undefined}
+            rel={channel.external ? "noopener noreferrer" : undefined}
+            class={`group flex flex-col items-center gap-3 rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-0.5 ${
+              channel.primary
+                ? "border-primary bg-primary hover:bg-primary-deep"
+                : "border-primary-fg/15 bg-primary-fg/[0.04] hover:border-primary-fg/30 hover:bg-primary-fg/[0.08]"
+            }`}
+          >
+            <Icon name={channel.icon} class="size-6" />
+            <span class="font-medium">{channel.label}</span>
+            <span class={channel.primary ? "text-sm text-primary-fg/80" : "text-sm text-primary-fg/55"}>
+              {channel.value}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-12 flex flex-col items-center justify-center gap-x-8 gap-y-3 border-t border-primary-fg/12 pt-10 text-sm text-primary-fg/65 sm:flex-row"
+      data-reveal
+      style="transition-delay: 280ms"
+    >
+      <p class="inline-flex items-center gap-2">
+        <Icon name="pin" class="size-4 text-primary-fg/45" />
+        {site.address.full}
+      </p>
+      <p class="inline-flex items-center gap-2">
+        <Icon name="clock" class="size-4 text-primary-fg/45" />
+        {site.hours}
+      </p>
+      <a
+        href={site.mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-medium text-primary-fg underline decoration-primary-fg/30 underline-offset-4 transition-colors hover:decoration-primary-fg"
+      >
+        Cómo llegar
+      </a>
+    </div>
+  </div>
+</section>

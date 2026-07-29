@@ -1,6 +1,13 @@
-﻿---
+---
+import Icon from "../ui/Icon.astro";
+
+/**
+ * OJO: estos testimonios son de ejemplo. Reemplazarlos por opiniones reales
+ * de clientes antes de difundir el sitio.
+ */
 interface Testimonial {
   name: string;
+  origin: string;
   text: string;
   rating: number;
 }
@@ -8,50 +15,65 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     name: "María González",
-    text: "Una experiencia increíble. El ambiente es perfecto para desconectarse. Volvería sin dudarlo.",
-    rating: 5
+    origin: "Copiapó",
+    text: "Una experiencia increíble. El ambiente es perfecto para desconectarse y el agua estaba a la temperatura justa. Volveríamos sin dudarlo.",
+    rating: 5,
   },
   {
-    name: "Carlos Mendez",
-    text: "Excelente atención. La tinaja es muy cómoda y relajante. Recomendado 100%.",
-    rating: 5
+    name: "Carlos Méndez",
+    origin: "La Serena",
+    text: "Excelente atención de principio a fin. La tinaja es cómoda y el silencio del desierto no se compara con nada. Recomendado.",
+    rating: 5,
   },
   {
     name: "Ana Silva",
-    text: "Fue exactamente lo que necesitaba. El equipo es muy amable y profesional.",
-    rating: 5
+    origin: "Caldera",
+    text: "Fue exactamente lo que necesitábamos después de una semana pesada. El equipo es muy amable y todo estaba impecable.",
+    rating: 5,
   },
   {
     name: "Juan Rossi",
-    text: "La cabaña superó mis expectativas. Desayuno delicioso y buena onda. Gracias!",
-    rating: 5
-  }
+    origin: "Santiago",
+    text: "La cabaña superó nuestras expectativas. Desayuno delicioso, buena onda y una noche de estrellas que no se olvida.",
+    rating: 5,
+  },
 ];
-
-const renderStars = (rating: number) => {
-  return "⭐".repeat(rating);
-};
 ---
 
-<section class="py-16 md:py-24 bg-background px-4">
-  <div class="max-w-6xl mx-auto">
-    <div class="text-center space-y-4 mb-12">
-      <h2 class="text-4xl font-bold text-fg">Lo Que Dicen Nuestros Clientes</h2>
-      <p class="text-lg text-fg-muted">Testimonios reales de visitantes</p>
+<section id="opiniones" class="scroll-mt-20 bg-background px-5 py-20 sm:px-6 sm:py-28">
+  <div class="mx-auto max-w-5xl">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <p class="eyebrow justify-center">Opiniones</p>
+      <h2 class="mt-5 text-fg">Lo que dicen quienes ya vinieron</h2>
     </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {testimonials.map((testimonial) => (
-        <div class="rounded-lg border border-border bg-surface p-6 space-y-3">
-          <div class="flex justify-between items-start">
-            <div>
-              <h4 class="font-semibold text-fg">{testimonial.name}</h4>
-            </div>
-            <div class="text-sm">{renderStars(testimonial.rating)}</div>
-          </div>
-          <p class="text-fg-muted italic">"{testimonial.text}"</p>
-        </div>
-      ))}
+
+    <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {
+        testimonials.map((testimonial, i) => (
+          <figure
+            class="relative flex flex-col rounded-2xl border border-border bg-surface p-7 shadow-soft transition-shadow duration-500 hover:shadow-lift"
+            data-reveal
+            style={`transition-delay: ${i * 90}ms`}
+          >
+            <Icon name="quote" class="size-7 text-primary/25" />
+
+            <blockquote class="mt-4 flex-1 text-fg-muted">{testimonial.text}</blockquote>
+
+            <figcaption class="mt-6 flex items-center justify-between gap-4 border-t border-border pt-5">
+              <div>
+                <p class="font-medium text-fg">{testimonial.name}</p>
+                <p class="text-sm text-fg-subtle">{testimonial.origin}</p>
+              </div>
+
+              <div class="flex gap-0.5 text-primary" aria-label={`${testimonial.rating} de 5 estrellas`}>
+                {Array.from({ length: testimonial.rating }).map(() => (
+                  <Icon name="star" class="size-4" />
+                ))}
+              </div>
+            </figcaption>
+          </figure>
+        ))
+      }
     </div>
   </div>
 </section>

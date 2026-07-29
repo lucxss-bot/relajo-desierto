@@ -1,41 +1,42 @@
-﻿---
+---
 interface Props {
   href?: string;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "onDark";
   size?: "sm" | "md" | "lg";
+  class?: string;
+  external?: boolean;
 }
 
-const { href, variant = "primary", size = "md" } = Astro.props;
+const { href, variant = "primary", size = "md", class: className = "", external = false } = Astro.props;
+
+const base =
+  "group inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-300 ease-out-soft active:scale-[0.98]";
+
+const sizes = {
+  sm: "px-4 py-2 text-sm",
+  md: "px-5 py-2.5 text-[0.95rem]",
+  lg: "px-7 py-3.5 text-base",
+};
+
+const variants = {
+  primary: "bg-primary text-primary-fg shadow-soft hover:bg-primary-deep hover:shadow-lift",
+  secondary: "border border-border bg-surface text-fg hover:border-primary/40 hover:text-primary-deep",
+  ghost: "text-primary-deep hover:bg-primary-soft",
+  onDark: "bg-primary-fg/95 text-ink hover:bg-primary-fg",
+};
+
+const classes = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
+const rel = external ? "noopener noreferrer" : undefined;
+const target = external ? "_blank" : undefined;
 ---
 
 {
   href ? (
-    <a
-      href={href}
-      class={`inline-flex items-center justify-center rounded-md font-medium transition-colors ${
-        size === "sm" ? "px-3 py-1.5 text-sm" : 
-        size === "lg" ? "px-6 py-3 text-lg" : 
-        "px-4 py-2 text-base"
-      } ${
-        variant === "primary" ? "bg-primary text-primary-fg hover:opacity-90" :
-        variant === "secondary" ? "bg-border text-foreground hover:bg-border/80" :
-        "text-primary hover:underline"
-      }`}
-    >
+    <a href={href} class={classes} rel={rel} target={target}>
       <slot />
     </a>
   ) : (
-    <button
-      class={`inline-flex items-center justify-center rounded-md font-medium transition-colors ${
-        size === "sm" ? "px-3 py-1.5 text-sm" : 
-        size === "lg" ? "px-6 py-3 text-lg" : 
-        "px-4 py-2 text-base"
-      } ${
-        variant === "primary" ? "bg-primary text-primary-fg hover:opacity-90" :
-        variant === "secondary" ? "bg-border text-foreground hover:bg-border/80" :
-        "text-primary hover:underline"
-      }`}
-    >
+    <button type="button" class={classes}>
       <slot />
     </button>
   )

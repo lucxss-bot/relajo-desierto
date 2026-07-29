@@ -1,16 +1,22 @@
-﻿---
+---
 import Base from "../layouts/Base.astro";
+import Nav from "../components/sections/Nav.astro";
 import Hero from "../components/sections/Hero.astro";
 import Services from "../components/sections/Services.astro";
 import Team from "../components/sections/Team.astro";
 import Testimonials from "../components/sections/Testimonials.astro";
+import Contact from "../components/sections/Contact.astro";
 import Footer from "../components/sections/Footer.astro";
 ---
 
 <Base>
-  <Hero />
-  <Services />
-  <Team />
-  <Testimonials />
+  <Nav />
+  <main id="contenido">
+    <Hero />
+    <Services />
+    <Team />
+    <Testimonials />
+    <Contact />
+  </main>
   <Footer />
 </Base>

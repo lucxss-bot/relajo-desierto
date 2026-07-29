@@ -1,50 +1,73 @@
-﻿---
-const businessName = "Relajo Desierto";
-const whatsapp = "https://wa.me/56912345678";
-const phone = "+56 9 1234 5678";
-const instagram = "https://instagram.com/relajo.desierto";
-const address = "Chamonate, Copiapó, Atacama, Chile";
+---
+import { site, whatsappLink } from "../../lib/site";
+import Icon from "../ui/Icon.astro";
+
 const year = new Date().getFullYear();
+
+const links = [
+  { label: "Experiencias", href: "#experiencias" },
+  { label: "Nosotros", href: "#nosotros" },
+  { label: "Opiniones", href: "#opiniones" },
+  { label: "Reservas", href: "#contacto" },
+];
+
+const socials = [
+  { label: "WhatsApp", href: whatsappLink(`Hola ${site.name}!`), icon: "whatsapp" as const },
+  { label: "Instagram", href: site.instagram, icon: "instagram" as const },
+];
 ---
 
-<footer class="bg-fg text-primary-fg py-12 px-4">
-  <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-      <!-- Contact -->
-      <div class="space-y-4">
-        <h3 class="font-semibold text-lg">{businessName}</h3>
-        <p class="text-sm opacity-90">{address}</p>
+<footer class="border-t border-primary-fg/10 bg-ink px-5 pb-10 pt-14 text-primary-fg sm:px-6">
+  <div class="mx-auto max-w-6xl">
+    <div class="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
+      <div class="max-w-xs">
+        <p class="flex items-center gap-2.5 font-display text-lg font-semibold">
+          <span class="flex size-8 items-center justify-center rounded-full bg-primary">
+            <Icon name="tinaja" class="size-[1.15rem]" />
+          </span>
+          {site.name}
+        </p>
+        <p class="mt-4 text-sm text-primary-fg/55">
+          {site.tagline}. {site.address.full}.
+        </p>
       </div>
 
-      <!-- Contact Links -->
-      <div class="space-y-3">
-        <h4 class="font-semibold">Contacto</h4>
-        <div class="flex flex-col gap-2 text-sm">
-          <a href={whatsapp} class="hover:underline flex items-center gap-2">
-            💬 WhatsApp
-          </a>
-          <a href={`tel:${phone}`} class="hover:underline flex items-center gap-2">
-            📞 Llamar
-          </a>
-          <a href={instagram} class="hover:underline flex items-center gap-2">
-            📸 Instagram
-          </a>
-        </div>
-      </div>
+      <nav aria-label="Pie de página">
+        <ul class="flex flex-wrap gap-x-7 gap-y-2.5 text-sm">
+          {
+            links.map((link) => (
+              <li>
+                <a href={link.href} class="text-primary-fg/65 transition-colors hover:text-primary-fg">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
 
-      <!-- Info -->
-      <div class="space-y-3">
-        <h4 class="font-semibold">Información</h4>
-        <div class="text-sm space-y-2">
-          <p>Tinaja • Jacuzzi • Cabaña</p>
-          <p>Bienestar en el Desierto</p>
-        </div>
+      <div class="flex gap-3">
+        {
+          socials.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              class="flex size-10 items-center justify-center rounded-full border border-primary-fg/15 text-primary-fg/70 transition-colors hover:border-primary hover:bg-primary hover:text-primary-fg"
+            >
+              <Icon name={social.icon} class="size-[1.15rem]" />
+            </a>
+          ))
+        }
       </div>
     </div>
 
-    <!-- Copyright -->
-    <div class="border-t border-primary-fg/20 pt-8 text-center text-sm opacity-75">
-      <p>&copy; {year} {businessName}. Todos los derechos reservados.</p>
+    <div
+      class="mt-12 flex flex-col gap-2 border-t border-primary-fg/10 pt-7 text-xs text-primary-fg/40 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>&copy; {year} {site.name}. Todos los derechos reservados.</p>
+      <p>{site.address.city}, Región de {site.address.region}, Chile</p>
     </div>
   </div>
 </footer>

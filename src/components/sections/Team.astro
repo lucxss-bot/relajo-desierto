@@ -1,49 +1,74 @@
-﻿---
+---
 interface TeamMember {
   name: string;
   role: string;
   bio: string;
+  gradient: string;
 }
 
 const team: TeamMember[] = [
   {
     name: "Fernanda",
-    role: "Propietaria & Guía",
-    bio: "Apasionada por el bienestar y las experiencias en la naturaleza. Créadora de Relajo Desierto."
+    role: "Fundadora",
+    bio: "Creó Relajo Desierto con la idea de que no hace falta viajar lejos para desconectarse de verdad.",
+    gradient: "linear-gradient(140deg, #f2c9ac 0%, #d3805a 100%)",
   },
   {
     name: "Claudia",
-    role: "Asistente de Experiencias",
-    bio: "Experta en hacer que cada cliente se sienta bienvenido y cuidado."
+    role: "Anfitriona",
+    bio: "Recibe a cada visita y se asegura de que todo esté listo antes de que llegues.",
+    gradient: "linear-gradient(140deg, #e8cfc8 0%, #bf8b81 100%)",
   },
   {
     name: "Roberto",
-    role: "Mantenimiento & Logística",
-    bio: "Garantiza que todo esté perfecto para tu llegada."
-  }
+    role: "Mantención",
+    bio: "Se encarga del agua, la temperatura y de que cada rincón esté impecable.",
+    gradient: "linear-gradient(140deg, #dcdcc6 0%, #8f9678 100%)",
+  },
 ];
 ---
 
-<section class="py-16 md:py-24 bg-surface px-4">
-  <div class="max-w-6xl mx-auto">
-    <div class="text-center space-y-4 mb-12">
-      <h2 class="text-4xl font-bold text-fg">Quiénes Somos</h2>
-      <p class="text-lg text-fg-muted">Un equipo familiar dedicado a tu bienestar</p>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {team.map((member) => (
-        <div class="text-center space-y-4">
-          <div class="w-32 h-32 mx-auto bg-border rounded-full flex items-center justify-center text-5xl">
-            👤
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold text-fg">{member.name}</h3>
-            <p class="text-sm text-primary font-medium">{member.role}</p>
-          </div>
-          <p class="text-fg-muted text-sm">{member.bio}</p>
-        </div>
-      ))}
+<section id="nosotros" class="scroll-mt-20 bg-surface-alt px-5 py-20 sm:px-6 sm:py-28">
+  <div class="mx-auto max-w-6xl">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+      <div data-reveal>
+        <p class="eyebrow">Quiénes somos</p>
+        <h2 class="mt-5 text-fg">Una familia, un pedazo de desierto</h2>
+        <p class="mt-5 text-lg text-fg-muted">
+          Relajo Desierto es un proyecto familiar en Chamonate. No somos un hotel ni un spa: somos tres personas
+          que preparan el agua, ponen la mesa y te dejan tranquilo.
+        </p>
+        <p class="mt-4 text-fg-muted">
+          Cada reserva la coordinamos nosotros mismos por WhatsApp, así que cualquier duda la responde alguien que
+          conoce el lugar de memoria.
+        </p>
+      </div>
+
+      <ul class="space-y-5">
+        {
+          team.map((member, i) => (
+            <li
+              class="flex items-start gap-5 rounded-2xl border border-border/70 bg-surface p-5 shadow-soft transition-shadow duration-500 hover:shadow-lift sm:p-6"
+              data-reveal
+              style={`transition-delay: ${i * 110}ms`}
+            >
+              <span
+                class="flex size-14 shrink-0 items-center justify-center rounded-full font-display text-xl font-semibold text-white/95 shadow-soft"
+                style={`background: ${member.gradient}`}
+                aria-hidden="true"
+              >
+                {member.name.charAt(0)}
+              </span>
+
+              <div>
+                <h3 class="text-lg text-fg">{member.name}</h3>
+                <p class="text-sm font-medium text-primary-deep">{member.role}</p>
+                <p class="mt-2 text-sm text-fg-muted">{member.bio}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </section>

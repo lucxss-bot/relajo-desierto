@@ -1,5 +1,6 @@
-﻿---
+---
 import "../styles/global.css";
+import { site } from "../lib/site";
 
 interface Props {
   title?: string;
@@ -7,13 +8,45 @@ interface Props {
   image?: string;
 }
 
-const { 
-  title = "Relajo Desierto - Bienestar en el Atacama",
-  description = "Tinaja, jacuzzi y cabaña con hidromasaje en el desierto de Atacama. Experiencias de turismo y bienestar en Copiapó.",
-  image = "/og-image.jpg"
+const {
+  title = `${site.name} — ${site.tagline}`,
+  description = site.description,
+  image = "/og-image.jpg",
 } = Astro.props;
 
 const canonical = Astro.url.href;
+const ogImage = new URL(image, Astro.site ?? Astro.url).href;
+
+// Schema.org LocalBusiness — es lo que Google lee para búsquedas locales
+// del tipo "tinaja Copiapó" y para la ficha en Maps.
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  name: site.name,
+  description: site.description,
+  url: canonical,
+  telephone: site.phoneDisplay,
+  image: ogImage,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+    streetAddress: site.address.locality,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: site.geo.lat,
+    longitude: site.geo.lng,
+  },
+  sameAs: [site.instagram],
+  amenityFeature: [
+    { "@type": "LocationFeatureSpecification", name: "Tinaja con hidromasaje", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Jacuzzi", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Desayuno incluido", value: true },
+  ],
+};
 ---
 
 <!doctype html>
@@ -22,39 +55,73 @@ const canonical = Astro.url.href;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#d8704d" />
-    
+    <meta name="theme-color" content="#c1593a" />
+
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
-    <!-- OG Tags -->
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
-    
-    <!-- Fonts -->
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
     <title>{title}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-fg"
+    >
+      Saltar al contenido
+    </a>
     <slot />
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        root.classList.add("js-reveal");
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+        );
+
+        const observe = () => {
+          for (const el of document.querySelectorAll("[data-reveal]")) io.observe(el);
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", observe);
+        } else {
+          observe();
+        }
+
+        // Red de seguridad: si a los 3 s no se reveló nada, el observer no está
+        // funcionando. Quitamos la clase para que el contenido nunca quede invisible.
+        setTimeout(() => {
+          if (document.querySelector("[data-reveal].is-visible")) return;
+          root.classList.remove("js-reveal");
+        }, 3000);
+      })();
+    </script>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --color-primary: #d8704d;
-    --color-primary-fg: #ffffff;
-    --color-background: #fafaf8;
-    --color-surface: #ffffff;
-    --color-border: #e5e0d9;
-    --color-fg: #2b2b2a;
-    --color-fg-muted: #6b6b6a;
-    --color-success: #4caf50;
-    --color-destructive: #c62828;
-  }
-</style>
