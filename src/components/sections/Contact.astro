@@ -4,6 +4,21 @@ import Icon from "../ui/Icon.astro";
 
 const cta = whatsappLink(`Hola ${site.name}! Quiero reservar. ¿Qué fechas tienen disponibles?`);
 
+const pasos = [
+  {
+    title: "Escríbenos",
+    detail: "Nos cuentas la fecha, cuántos son y si prefieres tinaja o jacuzzi.",
+  },
+  {
+    title: "Abonas el 50%",
+    detail: "Por transferencia. Con eso tu fecha queda tomada.",
+  },
+  {
+    title: "Pagas el resto al llegar",
+    detail: "El 50% restante se paga el día de la reserva o al ingresar.",
+  },
+];
+
 const channels = [
   {
     label: "WhatsApp",
@@ -73,10 +88,30 @@ const channels = [
       }
     </div>
 
+    <div class="mt-14 border-t border-primary-fg/12 pt-12" data-reveal style="transition-delay: 280ms">
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary-fg/50">Cómo reservar</p>
+
+      <ol class="mt-7 grid grid-cols-1 gap-6 text-left sm:grid-cols-3">
+        {
+          pasos.map((paso, i) => (
+            <li class="flex gap-4">
+              <span class="flex size-8 shrink-0 items-center justify-center rounded-full border border-primary-fg/25 font-display text-sm font-semibold text-primary-fg/80">
+                {i + 1}
+              </span>
+              <div>
+                <p class="font-medium text-primary-fg">{paso.title}</p>
+                <p class="mt-1 text-sm text-primary-fg/60">{paso.detail}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
     <div
       class="mt-12 flex flex-col items-center justify-center gap-x-8 gap-y-3 border-t border-primary-fg/12 pt-10 text-sm text-primary-fg/65 sm:flex-row"
       data-reveal
-      style="transition-delay: 280ms"
+      style="transition-delay: 350ms"
     >
       <p class="inline-flex items-center gap-2">
         <Icon name="pin" class="size-4 text-primary-fg/45" />
