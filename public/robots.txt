@@ -1,3 +1,4 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
-Sitemap: https://relajo-desierto.vercel.app/sitemap.xml
+
+Sitemap: https://relajo-desierto.vercel.app/sitemap-index.xml

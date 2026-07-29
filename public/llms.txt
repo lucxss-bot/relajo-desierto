@@ -1,12 +1,22 @@
-﻿# Relajo Desierto
+# Relajo Desierto
 
-Experiencias de bienestar en el Atacama
+Tinaja y jacuzzi con alojamiento opcional en el desierto de Atacama.
+Chamonate, Copiapó, Región de Atacama, Chile.
 
-## Sitios principales
+## Experiencias
 
-- https://relajo-desierto.vercel.app/ - Página principal
-- Tinaja: Hidromasaje para 6 personas
-- Jacuzzi: Hidroburbujas para 2 personas
-- Cabaña: Alojamiento con experiencias incluidas
+- Experiencia (sin alojamiento): $67.000 por 2 personas. 90 minutos de
+  tinaja o jacuzzi a elección, tabla de picoteo, pizzetas, espumante,
+  batas y souvenir. Persona adicional: $15.000.
+- Alojamiento + Experiencia: $120.000 por 2 personas. Todo lo anterior
+  más alojamiento en cabaña y 2 desayunos. Ingreso 16:00, salida 12:00
+  del día siguiente.
 
-Contacto: https://wa.me/56912345678
+En ambas se elige entre tinaja (hasta 6 personas) o jacuzzi (hasta 4).
+
+## Reservas
+
+Se abona el 50% por transferencia y el 50% restante se paga al ingresar.
+
+- Página principal: https://relajo-desierto.vercel.app/
+- Instagram: https://instagram.com/relajodesierto
