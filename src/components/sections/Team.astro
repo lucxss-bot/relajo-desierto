@@ -3,7 +3,6 @@ interface TeamMember {
   name: string;
   role: string;
   bio: string;
-  gradient: string;
 }
 
 // PENDIENTE: los cargos y las descripciones son un borrador. Ajustarlos a lo
@@ -13,60 +12,48 @@ const team: TeamMember[] = [
     name: "Fernanda",
     role: "Reservas y atención",
     bio: "Responde los mensajes y coordina cada reserva de principio a fin.",
-    gradient: "linear-gradient(140deg, #f2c9ac 0%, #d3805a 100%)",
   },
   {
     name: "Verónica",
     role: "Anfitriona",
     bio: "Recibe a cada visita y deja todo listo antes de que llegues.",
-    gradient: "linear-gradient(140deg, #e8cfc8 0%, #bf8b81 100%)",
   },
   {
     name: "Mauricio",
     role: "Mantención",
     bio: "Se encarga del agua, la temperatura y de que cada rincón esté impecable.",
-    gradient: "linear-gradient(140deg, #dcdcc6 0%, #8f9678 100%)",
   },
 ];
 ---
 
-<section id="nosotros" class="scroll-mt-20 bg-surface-alt px-5 py-20 sm:px-6 sm:py-28">
+<section id="nosotros" class="scroll-mt-20 bg-surface-alt px-5 py-band-sm sm:px-6">
   <div class="mx-auto max-w-6xl">
-    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-20">
       <div data-reveal>
         <p class="eyebrow">Quiénes somos</p>
-        <h2 class="mt-5 text-fg">Una familia, un pedazo de desierto</h2>
-        <p class="mt-5 text-lg text-fg-muted">
-          Relajo Desierto es un proyecto familiar en Chamonate. No somos un hotel ni un spa: somos tres personas
-          que preparan el agua, ponen la mesa y te dejan tranquilo.
-        </p>
-        <p class="mt-4 text-fg-muted">
-          Cada reserva la coordinamos nosotros mismos por WhatsApp, así que cualquier duda la responde alguien que
-          conoce el lugar de memoria.
+        <h2 class="mt-6 text-headline leading-[1.06] tracking-[-0.025em] text-fg">
+          Una familia, un pedazo de desierto
+        </h2>
+        <p class="mt-6 max-w-md text-lg text-fg-muted">
+          No somos un hotel ni un spa: somos tres personas que preparan el agua, ponen la mesa y te dejan
+          tranquilo. Cada reserva la coordinamos nosotros mismos.
         </p>
       </div>
 
-      <ul class="space-y-5">
+      {/* Lista tipográfica en vez de tarjetas: evita repetir por cuarta vez
+          la misma receta de borde + sombra + fondo blanco, y no finge tener
+          fotos del equipo con avatares de inicial sobre degradado. */}
+      <ul class="lg:pt-2">
         {
           team.map((member, i) => (
             <li
-              class="flex items-start gap-5 rounded-2xl border border-border/70 bg-surface p-5 shadow-soft transition-shadow duration-500 hover:shadow-lift sm:p-6"
+              class="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-1 border-t border-border py-6 first:border-t-0 first:pt-0 sm:gap-x-8"
               data-reveal
-              style={`transition-delay: ${i * 110}ms`}
+              style={`transition-delay: ${i * 90}ms`}
             >
-              <span
-                class="flex size-14 shrink-0 items-center justify-center rounded-full font-display text-xl font-semibold text-white/95 shadow-soft"
-                style={`background: ${member.gradient}`}
-                aria-hidden="true"
-              >
-                {member.name.charAt(0)}
-              </span>
-
-              <div>
-                <h3 class="text-lg text-fg">{member.name}</h3>
-                <p class="text-sm font-medium text-primary-deep">{member.role}</p>
-                <p class="mt-2 text-sm text-fg-muted">{member.bio}</p>
-              </div>
+              <h3 class="text-2xl text-fg">{member.name}</h3>
+              <p class="text-xs font-semibold uppercase tracking-[0.14em] text-primary-deep">{member.role}</p>
+              <p class="col-start-2 mt-1 text-fg-muted">{member.bio}</p>
             </li>
           ))
         }
