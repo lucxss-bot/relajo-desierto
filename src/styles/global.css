@@ -200,7 +200,9 @@
   }
 
   /* Relleno que entra deslizándose desde la izquierda al pasar el cursor.
-     460ms y ease-out-soft: llega frenando, no de golpe.
+     600ms y ease-out-soft: llega frenando, no de golpe. Por encima del
+     presupuesto normal de hover a propósito — la marca es de descanso y el
+     barrido tiene que leerse pausado.
 
      El color de llegada se elige para que el texto del botón NO tenga que
      cambiar durante el recorrido. Si el texto cambiara a mitad del barrido
@@ -218,7 +220,7 @@
     z-index: -1;
     background: var(--slide, var(--color-primary-deep));
     transform: translateX(-101%);
-    transition: transform 460ms var(--ease-out-soft);
+    transition: transform 600ms var(--ease-out-soft);
   }
 
   /* Solo con puntero fino: en táctil el hover se queda pegado tras el toque. */
