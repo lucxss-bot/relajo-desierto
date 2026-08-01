@@ -141,6 +141,11 @@
   outline-color: var(--color-primary-fg);
 }
 
+/* La barra solo es oscura mientras está sobre el hero. */
+[data-nav].at-top :focus-visible {
+  outline-color: var(--color-primary-fg);
+}
+
 @layer components {
   /* Antetítulo de sección */
   .eyebrow {
@@ -177,6 +182,56 @@
   .grain-dark::after {
     mix-blend-mode: overlay;
     opacity: 0.3;
+  }
+
+  /* Barra de navegación: transparente mientras el hero ocupa la pantalla,
+     sólida al bajar. Un bar crema recortando la foto a sangre completa
+     era lo que más achataba la parte superior de la página.
+
+     El estado SÓLIDO es el de partida a propósito: si el observer no llega
+     a correr, la barra queda legible. Al revés quedaría texto crema sobre
+     fondo crema. */
+  [data-nav] {
+    background-color: color-mix(in srgb, var(--color-background) 88%, transparent);
+    border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
+    backdrop-filter: blur(12px);
+    transition:
+      background-color 0.4s var(--ease-out-soft),
+      border-color 0.4s var(--ease-out-soft);
+  }
+
+  [data-nav] .nav-brand-text {
+    color: var(--color-fg);
+  }
+
+  [data-nav] .nav-link {
+    color: var(--color-fg-muted);
+  }
+
+  [data-nav] .nav-link:hover {
+    color: var(--color-primary-deep);
+  }
+
+  [data-nav] .nav-mark {
+    transition: filter 0.4s var(--ease-out-soft);
+  }
+
+  /* Sobre el hero */
+  [data-nav].at-top {
+    background-color: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+  }
+
+  [data-nav].at-top .nav-brand-text,
+  [data-nav].at-top .nav-link {
+    color: var(--color-primary-fg);
+  }
+
+  /* El logotipo es café oscuro; sobre la foto se blanquea con filtro en
+     vez de cargar un segundo archivo. */
+  [data-nav].at-top .nav-mark {
+    filter: brightness(0) invert(1);
   }
 }
 

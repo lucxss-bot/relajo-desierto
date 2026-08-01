@@ -21,7 +21,7 @@ const highlights = ["Tinaja hasta 6", "Jacuzzi hasta 4", "Con o sin alojamiento"
 ---
 
 <section
-  class="grain grain-dark relative isolate flex min-h-[calc(100svh-4rem)] items-end overflow-hidden"
+  class="grain grain-dark relative isolate -mt-16 flex min-h-svh items-end overflow-hidden"
   data-on-dark
 >
   <!-- Foto de fondo. La deriva lenta evita que la imagen se lea como un fondo fijo. -->
@@ -38,6 +38,15 @@ const highlights = ["Tinaja hasta 6", "Jacuzzi hasta 4", "Con o sin alojamiento"
   <!-- Dos velos cruzados en vez de uno: el vertical asienta el texto contra
        el borde inferior, el horizontal lo despega del lado derecho. -->
   <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/92 via-ink/58 to-ink/28" aria-hidden="true"></div>
+
+  <!-- Velo propio para la banda del nav: arriba el velo general solo llega
+       al 28% y los enlaces crema quedaban en 4.5:1 justo sobre el cielo
+       naranja. Con esto suben a 6.2:1. -->
+  <div
+    class="absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-ink/70 via-ink/20 to-transparent"
+    aria-hidden="true"
+  >
+  </div>
   <div
     class="absolute inset-0 -z-10 bg-gradient-to-r from-ink/75 via-ink/25 to-transparent"
     aria-hidden="true"
