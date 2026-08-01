@@ -160,6 +160,23 @@
     @apply h-px w-6 bg-primary/40;
   }
 
+  /* Tarjetas que se elevan al pasar el cursor.
+     240ms: por encima de 300 el hover empieza a sentirse perezoso. La lista
+     es explícita para que no entre nada más — con transition-all cualquier
+     propiedad que cambie se anima, la quieras animar o no. */
+  .lift {
+    transition:
+      transform 240ms var(--ease-out-soft),
+      box-shadow 240ms var(--ease-out-soft),
+      border-color 240ms var(--ease-out-soft);
+  }
+
+  /* La foto va algo más lenta que la tarjeta que la contiene: las dos se
+     mueven en el mismo hover y el desfase da sensación de profundidad. */
+  .media-zoom {
+    transition: transform 400ms var(--ease-out-soft);
+  }
+
   /* Botones y enlaces de acción.
      Una sola declaración en vez de transition-all: el pulso necesita 140ms
      y el color 300ms, y transition-all los obliga a compartir duración. */
@@ -303,12 +320,9 @@
 
   /* Nada se desplaza ni hace zoom: ni las tarjetas al pasar el cursor ni
      las fotos dentro de su marco. */
-  article:hover,
-  .pressable:hover {
-    transform: none !important;
-  }
-
-  .group:hover img {
+  .lift:hover,
+  .pressable:hover,
+  .group:hover .media-zoom {
     transform: none !important;
   }
 
