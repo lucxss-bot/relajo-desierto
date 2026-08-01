@@ -12,7 +12,7 @@ interface Props {
 
 const {
   displayLines = ["Donde comienza", "tu descanso"],
-  subheadline = "Tinaja hasta 6 personas o jacuzzi hasta 4, con tabla, pizzetas y espumante. A minutos de Copiapó, en pleno desierto de Atacama.",
+  subheadline = "Tinaja o jacuzzi bajo el cielo del Atacama, a minutos de Copiapó. Con tabla, pizzetas y espumante.",
 } = Astro.props;
 
 const cta = whatsappLink(`Hola ${site.name}! Quiero consultar disponibilidad.`);
@@ -90,14 +90,15 @@ const highlights = ["Tinaja hasta 6", "Jacuzzi hasta 4", "Con o sin alojamiento"
           href={cta}
           target="_blank"
           rel="noopener noreferrer"
-          class="pressable inline-flex items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-base font-medium text-primary-fg shadow-float hover:bg-primary-deep hover:shadow-lift"
+          class="pressable slide-fill inline-flex items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-base font-medium text-primary-fg shadow-float hover:shadow-lift"
         >
           <Icon name="whatsapp" class="size-5" />
           Reservar por WhatsApp
         </a>
         <a
           href="#experiencias"
-          class="pressable inline-flex items-center justify-center gap-2 rounded-full border border-primary-fg/30 px-8 py-4 text-base font-medium text-primary-fg backdrop-blur-sm hover:border-primary-fg/60 hover:bg-primary-fg/10"
+          class="pressable slide-fill inline-flex items-center justify-center gap-2 rounded-full border border-primary-fg/30 px-8 py-4 text-base font-medium text-primary-fg backdrop-blur-sm hover:border-primary-fg/60"
+          style="--slide: rgb(255 253 251 / 0.16)"
         >
           Ver experiencias
         </a>

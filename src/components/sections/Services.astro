@@ -65,11 +65,10 @@ const wa = (nombre: string) =>
 
   <div class="mx-auto max-w-6xl">
     <div class="max-w-2xl" data-reveal>
-      <p class="eyebrow">Nuestras experiencias</p>
+      <p class="eyebrow">Experiencias</p>
       <h2 class="mt-6 text-headline leading-[1.06] tracking-[-0.025em] text-fg">Tres formas de venir</h2>
       <p class="mt-5 text-lg text-fg-muted">
-        Dos de agua caliente por 90 minutos, y una con la noche incluida. Todas traen tabla, pizzetas y
-        espumante.
+        Dos por unas horas, una con la noche incluida. Las tres con tabla, pizzetas y espumante.
       </p>
     </div>
 
@@ -130,7 +129,7 @@ const wa = (nombre: string) =>
               href={wa("la tinaja")}
               target="_blank"
               rel="noopener noreferrer"
-              class="pressable inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-medium text-primary-fg hover:bg-primary-deep hover:shadow-lift"
+              class="pressable slide-fill inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-medium text-primary-fg hover:shadow-lift"
             >
               <Icon name="whatsapp" class="size-[1.05rem]" />
               Reservar tinaja
@@ -185,7 +184,8 @@ const wa = (nombre: string) =>
               href={wa("el jacuzzi")}
               target="_blank"
               rel="noopener noreferrer"
-              class="pressable mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/30 bg-surface px-6 py-3.5 font-medium text-primary-deep hover:border-primary hover:bg-primary hover:text-primary-fg"
+              class="pressable slide-fill mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/30 bg-surface px-6 py-3.5 font-medium text-primary-deep hover:border-primary"
+              style="--slide: var(--color-primary-soft)"
             >
               <Icon name="whatsapp" class="size-[1.05rem]" />
               Reservar jacuzzi
@@ -257,7 +257,7 @@ const wa = (nombre: string) =>
               href={wa("la cabaña")}
               target="_blank"
               rel="noopener noreferrer"
-              class="pressable inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 font-medium text-primary-fg hover:bg-primary-deep hover:shadow-lift"
+              class="pressable slide-fill inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 font-medium text-primary-fg hover:shadow-lift"
             >
               <Icon name="whatsapp" class="size-[1.05rem]" />
               Reservar cabaña

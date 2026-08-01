@@ -105,18 +105,23 @@
     @apply tracking-tight text-balance;
   }
 
+  /* Fraunces es variable en cuatro ejes y hasta ahora solo se usaba opsz.
+     SOFT redondea los remates y WONK activa las formas alternas (la g y la
+     y con cola de lazo). Es lo que le da carácter a la fuente; a tamaño
+     grande se nota, a tamaño chico estorba, por eso baja con el nivel.
+     wght no va aquí a propósito: si se lista, anula font-weight. */
   h1 {
-    font-variation-settings: "opsz" 144;
+    font-variation-settings: "opsz" 144, "SOFT" 42, "WONK" 1;
     @apply text-4xl leading-[1.05] font-semibold sm:text-5xl lg:text-6xl;
   }
 
   h2 {
-    font-variation-settings: "opsz" 96;
+    font-variation-settings: "opsz" 96, "SOFT" 34, "WONK" 1;
     @apply text-3xl leading-[1.12] font-semibold sm:text-4xl;
   }
 
   h3 {
-    font-variation-settings: "opsz" 28;
+    font-variation-settings: "opsz" 28, "SOFT" 18, "WONK" 0;
     @apply text-xl leading-snug font-semibold;
   }
 
@@ -192,6 +197,35 @@
 
   .pressable:active {
     transform: scale(0.98);
+  }
+
+  /* Relleno que entra deslizándose desde la izquierda al pasar el cursor.
+     460ms y ease-out-soft: llega frenando, no de golpe.
+
+     El color de llegada se elige para que el texto del botón NO tenga que
+     cambiar durante el recorrido. Si el texto cambiara a mitad del barrido
+     habría un instante de crema sobre crema. */
+  .slide-fill {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .slide-fill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--slide, var(--color-primary-deep));
+    transform: translateX(-101%);
+    transition: transform 460ms var(--ease-out-soft);
+  }
+
+  /* Solo con puntero fino: en táctil el hover se queda pegado tras el toque. */
+  @media (hover: hover) and (pointer: fine) {
+    .slide-fill:hover::before {
+      transform: none;
+    }
   }
 
   /* Traspaso a WhatsApp: el navegador tarda hasta 800ms en abrir la app y
@@ -324,6 +358,12 @@
   .pressable:hover,
   .group:hover .media-zoom {
     transform: none !important;
+  }
+
+  /* El relleno aparece sin recorrido: sigue siendo un cambio de color,
+     que no es lo que molesta a quien pide menos movimiento. */
+  .slide-fill::before {
+    transition: none !important;
   }
 
   /* El pulso sí se conserva. No es decoración: es la confirmación de que
