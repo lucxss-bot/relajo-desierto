@@ -2,12 +2,13 @@
 import { Image } from "astro:assets";
 import { site, whatsappLink } from "../../lib/site";
 import Icon from "../ui/Icon.astro";
-import logo from "../../assets/fotos/logo.jpg";
+import logo from "../../assets/fotos/logo-claro.png";
 
 const year = new Date().getFullYear();
 
 const links = [
   { label: "Experiencias", href: "#experiencias" },
+  { label: "Tinaja y jacuzzi", href: "#opciones" },
   { label: "Nosotros", href: "#nosotros" },
   { label: "Opiniones", href: "#opiniones" },
   { label: "Reservas", href: "#contacto" },
@@ -26,9 +27,9 @@ const socials = [
         <Image
           src={logo}
           alt={`${site.name} — ${site.slogan}`}
-          class="w-40 rounded-xl bg-white p-3"
-          widths={[160, 320]}
-          sizes="160px"
+          class="w-44"
+          widths={[176, 352]}
+          sizes="176px"
           loading="lazy"
         />
         <p class="mt-4 text-sm text-primary-fg/55">

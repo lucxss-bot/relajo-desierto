@@ -30,11 +30,12 @@ const schema = {
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
+    streetAddress: `${site.address.street}, ${site.address.locality}`,
     addressLocality: site.address.city,
     addressRegion: site.address.region,
     addressCountry: site.address.country,
-    streetAddress: site.address.locality,
   },
+  hasMap: site.mapsUrl,
   geo: {
     "@type": "GeoCoordinates",
     latitude: site.geo.lat,

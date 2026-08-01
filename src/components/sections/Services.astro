@@ -64,27 +64,6 @@ const paquetes: Paquete[] = [
   },
 ];
 
-interface OpcionAgua {
-  name: string;
-  capacity: string;
-  detail: string;
-  icon: IconName;
-}
-
-const opcionesAgua: OpcionAgua[] = [
-  {
-    name: "Tinaja",
-    capacity: "Hasta 6 personas",
-    detail: "De madera, con hidromasaje, bajo techo de totora.",
-    icon: "tinaja",
-  },
-  {
-    name: "Jacuzzi",
-    capacity: "Hasta 4 personas",
-    detail: "Con hidroburbujas, en un espacio más recogido.",
-    icon: "jacuzzi",
-  },
-];
 ---
 
 <section id="experiencias" class="scroll-mt-20 bg-background px-5 py-20 sm:px-6 sm:py-28">
@@ -180,34 +159,11 @@ const opcionesAgua: OpcionAgua[] = [
       }
     </div>
 
-    {/* Elección de tinaja o jacuzzi, común a los dos paquetes */}
-    <div
-      class="mt-8 rounded-2xl border border-border bg-surface-alt p-6 sm:p-8"
-      data-reveal
-      style="transition-delay: 220ms"
-    >
-      <p class="text-center text-sm font-semibold uppercase tracking-[0.14em] text-primary-deep">
-        En cualquiera de las dos, eliges
-      </p>
-
-      <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {
-          opcionesAgua.map((opcion) => (
-            <div class="flex items-start gap-4 rounded-xl bg-surface p-5">
-              <span class="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary-deep">
-                <Icon name={opcion.icon} class="size-6" />
-              </span>
-              <div>
-                <p class="flex flex-wrap items-baseline gap-x-2.5">
-                  <span class="font-display text-lg font-semibold text-fg">{opcion.name}</span>
-                  <span class="text-sm text-primary-deep">{opcion.capacity}</span>
-                </p>
-                <p class="mt-1 text-sm text-fg-muted">{opcion.detail}</p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
+    <p class="mt-10 text-center text-fg-muted" data-reveal>
+      En las dos eliges tinaja o jacuzzi.
+      <a href="#opciones" class="font-medium text-primary-deep underline underline-offset-4 hover:text-primary">
+        Mira las diferencias
+      </a>.
+    </p>
   </div>
 </section>

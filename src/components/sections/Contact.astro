@@ -110,26 +110,38 @@ const channels = [
     </div>
 
     <div
-      class="mt-12 flex flex-col items-center justify-center gap-x-8 gap-y-3 border-t border-primary-fg/12 pt-10 text-sm text-primary-fg/65 sm:flex-row"
+      class="mt-12 border-t border-primary-fg/12 pt-10"
       data-reveal
       style="transition-delay: 350ms"
     >
-      <p class="inline-flex items-center gap-2">
-        <Icon name="pin" class="size-4 text-primary-fg/45" />
-        {site.address.full}
-      </p>
-      <p class="inline-flex items-center gap-2">
-        <Icon name="clock" class="size-4 text-primary-fg/45" />
-        {site.hours}
-      </p>
-      <a
-        href={site.mapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex min-h-11 items-center font-medium text-primary-fg underline decoration-primary-fg/30 underline-offset-4 transition-colors hover:decoration-primary-fg"
-      >
-        Cómo llegar
-      </a>
+      <div class="mx-auto flex max-w-xl flex-col items-center gap-5">
+        <div class="space-y-2 text-sm text-primary-fg/70">
+          <p class="inline-flex items-center justify-center gap-2">
+            <Icon name="pin" class="size-4 shrink-0 text-primary-fg/50" />
+            {site.address.full}
+          </p>
+          <p class="inline-flex items-center justify-center gap-2">
+            <Icon name="clock" class="size-4 shrink-0 text-primary-fg/50" />
+            {site.hours}
+          </p>
+        </div>
+
+        {/* La dirección por sí sola no se encuentra en Maps: son parcelas.
+            Por eso el botón lleva a las coordenadas exactas. */}
+        <a
+          href={site.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-11 items-center gap-2 rounded-full border border-primary-fg/25 px-6 py-3 font-medium text-primary-fg transition-colors hover:border-primary-fg/50 hover:bg-primary-fg/10"
+        >
+          <Icon name="pin" class="size-[1.05rem]" />
+          Cómo llegar en Google Maps
+        </a>
+
+        <p class="text-xs text-primary-fg/50">
+          El pasaje no aparece por nombre en Maps. El botón te lleva directo al punto.
+        </p>
+      </div>
     </div>
   </div>
 </section>
