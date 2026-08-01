@@ -124,5 +124,29 @@ const schema = {
         }, 3000);
       })();
     </script>
+
+    <script is:inline>
+      // Traspaso a WhatsApp. Entre el toque y la apertura de la app pasan
+      // hasta 800 ms en los que no ocurre nada visible, y es justo el único
+      // momento de conversión de la página. El enlace se queda atenuado
+      // hasta que se vuelve a la pestaña.
+      (() => {
+        const limpiar = (el) => el.classList.remove("is-launching");
+
+        for (const enlace of document.querySelectorAll('a[href*="wa.me"]')) {
+          enlace.addEventListener("pointerdown", () => {
+            enlace.classList.add("is-launching");
+            // Si la app no llega a abrirse, no dejarlo apagado para siempre.
+            setTimeout(() => limpiar(enlace), 4000);
+          });
+          enlace.addEventListener("pointercancel", () => limpiar(enlace));
+        }
+
+        document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState !== "visible") return;
+          for (const el of document.querySelectorAll(".is-launching")) limpiar(el);
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -73,8 +73,11 @@
     to   { transform: none; }
   }
 
-  /* Indicador de scroll: baja y se desvanece, en vez del rebote de Tailwind */
-  --animate-sink: sink 2.4s var(--ease-out-soft) infinite;
+  /* Indicador de scroll: baja y se desvanece, en vez del rebote de Tailwind.
+     Tres ciclos y para: en una página sobre descansar, un elemento en bucle
+     perpetuo es lo único que nunca deja que se asiente. forwards lo deja
+     desvanecido en vez de reaparecer de golpe al terminar. */
+  --animate-sink: sink 2.4s var(--ease-out-soft) 3 forwards;
   @keyframes sink {
     0%   { transform: translateY(-30%); opacity: 0; }
     35%  { opacity: 1; }
@@ -157,6 +160,30 @@
     @apply h-px w-6 bg-primary/40;
   }
 
+  /* Botones y enlaces de acción.
+     Una sola declaración en vez de transition-all: el pulso necesita 140ms
+     y el color 300ms, y transition-all los obliga a compartir duración. */
+  .pressable {
+    transition:
+      transform 140ms var(--ease-out-soft),
+      opacity 120ms var(--ease-out-soft),
+      background-color 300ms var(--ease-out-soft),
+      border-color 300ms var(--ease-out-soft),
+      color 300ms var(--ease-out-soft),
+      box-shadow 300ms var(--ease-out-soft);
+  }
+
+  .pressable:active {
+    transform: scale(0.98);
+  }
+
+  /* Traspaso a WhatsApp: el navegador tarda hasta 800ms en abrir la app y
+     en ese hueco no pasa nada. El enlace se queda atenuado hasta que se
+     vuelve a la pestaña, para que se note que el toque entró. */
+  .pressable.is-launching {
+    opacity: 0.75;
+  }
+
   /* Máscara por línea: el hijo se anima desde abajo y el padre lo recorta,
      así el texto aparece "desde detrás" de su propia línea base. */
   .line-mask {
@@ -195,9 +222,13 @@
     background-color: color-mix(in srgb, var(--color-background) 88%, transparent);
     border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
     backdrop-filter: blur(12px);
+    /* El desenfoque va en la lista: si no, entra de golpe mientras el fondo
+       se funde en 400ms, y el desajuste se nota. */
     transition:
       background-color 0.4s var(--ease-out-soft),
-      border-color 0.4s var(--ease-out-soft);
+      border-color 0.4s var(--ease-out-soft),
+      -webkit-backdrop-filter 0.4s var(--ease-out-soft),
+      backdrop-filter 0.4s var(--ease-out-soft);
   }
 
   [data-nav] .nav-brand-text {
@@ -268,6 +299,25 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  }
+
+  /* Nada se desplaza ni hace zoom: ni las tarjetas al pasar el cursor ni
+     las fotos dentro de su marco. */
+  article:hover,
+  .pressable:hover {
+    transform: none !important;
+  }
+
+  .group:hover img {
+    transform: none !important;
+  }
+
+  /* El pulso sí se conserva. No es decoración: es la confirmación de que
+     el toque entró, y en móvil es la única que existe. Un 2% de escala en
+     140ms no es un disparador vestibular.
+     Antes esta regla cortaba TODA transición a 0.01ms y estos usuarios se
+     quedaban sin ninguna respuesta al pulsar. */
+  .pressable:active {
+    transform: scale(0.98) !important;
   }
 }
