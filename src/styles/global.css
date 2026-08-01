@@ -1,8 +1,9 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Marca — terracota del desierto */
-  --color-primary: #c1593a;
+  /* Marca — terracota del desierto.
+     primary está calibrado para dar 4.6:1 con texto blanco encima (WCAG AA). */
+  --color-primary: #bd5637;
   --color-primary-deep: #9c4a2d;
   --color-primary-soft: #f7e9e2;
   --color-primary-fg: #fffdfb;
@@ -17,7 +18,8 @@
   /* Texto */
   --color-fg: #241f1c;
   --color-fg-muted: #6b6259;
-  --color-fg-subtle: #948a7e;
+  /* 4.9:1 sobre el fondo crema — el gris anterior (#948a7e) daba 3.4:1 */
+  --color-fg-subtle: #756b61;
 
   /* Acento secundario — salvia */
   --color-sage: #55665a;
@@ -78,12 +80,20 @@
     background: var(--color-primary-soft);
     color: var(--color-primary-deep);
   }
+}
 
-  :focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
+/* Fuera de @layer para que gane al anillo por defecto del navegador,
+   que aquí salía blanco y se perdía sobre los fondos claros. */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Sobre las secciones oscuras el terracota no destaca: usamos el crema. */
+.bg-ink :focus-visible,
+[data-on-dark] :focus-visible {
+  outline-color: var(--color-primary-fg);
 }
 
 @layer components {

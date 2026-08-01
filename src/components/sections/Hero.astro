@@ -19,7 +19,10 @@ const cta = whatsappLink(`Hola ${site.name}! Quiero consultar disponibilidad.`);
 const highlights = ["Tinaja hasta 6 personas", "Jacuzzi hasta 4", "Con o sin alojamiento"];
 ---
 
-<section class="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden">
+<section
+  class="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden"
+  data-on-dark
+>
   <!-- Foto de fondo -->
   <Image
     src={atardecer}
@@ -92,7 +95,7 @@ const highlights = ["Tinaja hasta 6 personas", "Jacuzzi hasta 4", "Con o sin alo
 
   <a
     href="#experiencias"
-    class="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 text-primary-fg/50 transition-colors hover:text-primary-fg sm:block"
+    class="absolute bottom-4 left-1/2 z-10 hidden size-11 -translate-x-1/2 items-center justify-center text-primary-fg/60 transition-colors hover:text-primary-fg sm:flex"
     aria-label="Ir a las experiencias"
   >
     <Icon name="arrow-down" class="size-5 animate-bounce" />

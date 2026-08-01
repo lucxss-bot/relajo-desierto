@@ -41,7 +41,10 @@ const socials = [
           {
             links.map((link) => (
               <li>
-                <a href={link.href} class="text-primary-fg/65 transition-colors hover:text-primary-fg">
+                <a
+                  href={link.href}
+                  class="inline-flex min-h-11 items-center text-primary-fg/70 transition-colors hover:text-primary-fg"
+                >
                   {link.label}
                 </a>
               </li>
@@ -58,7 +61,7 @@ const socials = [
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}
-              class="flex size-10 items-center justify-center rounded-full border border-primary-fg/15 text-primary-fg/70 transition-colors hover:border-primary hover:bg-primary hover:text-primary-fg"
+              class="flex size-11 items-center justify-center rounded-full border border-primary-fg/20 text-primary-fg/75 transition-colors hover:border-primary hover:bg-primary hover:text-primary-fg"
             >
               <Icon name={social.icon} class="size-[1.15rem]" />
             </a>
@@ -68,7 +71,7 @@ const socials = [
     </div>
 
     <div
-      class="mt-12 flex flex-col gap-2 border-t border-primary-fg/10 pt-7 text-xs text-primary-fg/40 sm:flex-row sm:items-center sm:justify-between"
+      class="mt-12 flex flex-col gap-2 border-t border-primary-fg/10 pt-7 text-xs text-primary-fg/60 sm:flex-row sm:items-center sm:justify-between"
     >
       <p>&copy; {year} {site.name}. Todos los derechos reservados.</p>
       <p>{site.address.city}, Región de {site.address.region}, Chile</p>

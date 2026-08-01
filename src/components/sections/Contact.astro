@@ -80,7 +80,8 @@ const channels = [
           >
             <Icon name={channel.icon} class="size-6" />
             <span class="font-medium">{channel.label}</span>
-            <span class={channel.primary ? "text-sm text-primary-fg/80" : "text-sm text-primary-fg/55"}>
+            {/* Sobre el terracota, el blanco a opacidad reducida no llega a 4.5:1 */}
+            <span class={channel.primary ? "text-sm text-primary-fg" : "text-sm text-primary-fg/60"}>
               {channel.value}
             </span>
           </a>
@@ -125,7 +126,7 @@ const channels = [
         href={site.mapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="font-medium text-primary-fg underline decoration-primary-fg/30 underline-offset-4 transition-colors hover:decoration-primary-fg"
+        class="inline-flex min-h-11 items-center font-medium text-primary-fg underline decoration-primary-fg/30 underline-offset-4 transition-colors hover:decoration-primary-fg"
       >
         Cómo llegar
       </a>
