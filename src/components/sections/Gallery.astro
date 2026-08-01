@@ -11,67 +11,96 @@ interface Photo {
   src: ImageMetadata;
   alt: string;
   caption: string;
+  /** Alterna la proporción para que la fila no se lea como cuatro cajas iguales. */
+  ratio: string;
+  /** Desplaza en vertical en escritorio; rompe la línea base de la rejilla. */
+  offset: boolean;
 }
 
 const photos: Photo[] = [
   {
     src: tabla,
     alt: "Tabla de picoteo con quesos, frutas y espumante en Relajo Desierto",
-    caption: "La tabla que viene con tu tinaja",
+    caption: "La tabla que viene incluida",
+    ratio: "aspect-[4/5]",
+    offset: false,
   },
   {
     src: desayuno,
     alt: "Bandeja de desayuno con café, sándwiches y fruta fresca en la cabaña",
-    caption: "Desayuno incluido en la cabaña",
+    caption: "Desayuno en la cabaña",
+    ratio: "aspect-[3/4]",
+    offset: true,
   },
   {
     src: nocheCopas,
     alt: "Dos copas de espumante servidas de noche junto al sector de tinajas",
-    caption: "Espumante incluido, siempre",
+    caption: "Espumante, siempre",
+    ratio: "aspect-[4/5]",
+    offset: false,
   },
   {
     src: jardinNoche,
     alt: "Jardín de cactus y yucas del desierto iluminado de noche",
     caption: "El desierto, de noche",
+    ratio: "aspect-[3/4]",
+    offset: true,
   },
 ];
 ---
 
-<section class="bg-background px-5 pb-20 sm:px-6 sm:pb-28">
-  <div class="mx-auto max-w-6xl">
-    <div class="mx-auto max-w-2xl text-center" data-reveal>
-      <p class="eyebrow justify-center">El lugar</p>
-      <h2 class="mt-5 text-fg">Así se ve por acá</h2>
-    </div>
-
-    <div class="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-      {
-        photos.map((photo, i) => (
-          <figure
-            class="group relative overflow-hidden rounded-2xl"
-            data-reveal
-            style={`transition-delay: ${i * 90}ms`}
-          >
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              class="aspect-[4/5] w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105"
-              widths={[300, 480, 640]}
-              sizes="(min-width: 1024px) 25vw, 50vw"
-              loading="lazy"
-            />
-
-            <div
-              class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/35 to-transparent p-4 pt-12"
-              aria-hidden="true"
-            />
-
-            <figcaption class="absolute inset-x-0 bottom-0 p-4 text-sm font-medium text-primary-fg">
-              {photo.caption}
-            </figcaption>
-          </figure>
-        ))
-      }
+<section class="overflow-hidden bg-background py-band-md">
+  <!-- Cabecera contenida, fotos a sangre completa: la tensión entre las dos
+       anchuras es lo que rompe el ritmo de contenedor de todas las secciones. -->
+  <div class="mx-auto max-w-6xl px-5 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between gap-x-10 gap-y-4" data-reveal>
+      <div>
+        <p class="eyebrow">El lugar</p>
+        <h2 class="mt-6 text-headline leading-[1.06] tracking-[-0.025em] text-fg">Así se ve por acá</h2>
+      </div>
+      <p class="max-w-sm text-fg-muted">
+        Fotos tomadas en el lugar, sin retoque. Lo que ves es lo que te espera.
+      </p>
     </div>
   </div>
+
+  <!-- La proporción va en la figura, no en la imagen: como figure es ítem de
+       grid, align-items:stretch le imponía la altura de la fila y las cuatro
+       terminaban midiendo lo mismo. self-start lo evita. -->
+  <div class="mt-14 grid grid-cols-2 gap-3 px-3 sm:gap-4 sm:px-4 lg:grid-cols-4">
+    {
+      photos.map((photo, i) => (
+        <figure
+          class={`group relative self-start overflow-hidden rounded-md sm:rounded-lg ${photo.ratio} ${
+            photo.offset ? "lg:translate-y-10" : ""
+          }`}
+          data-reveal
+          style={`transition-delay: ${i * 90}ms`}
+        >
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            class="size-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105"
+            widths={[300, 480, 640]}
+            sizes="(min-width: 1024px) 25vw, 50vw"
+            loading="lazy"
+          />
+
+          <div
+            class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent"
+            aria-hidden="true"
+          >
+          </div>
+
+          <figcaption class="absolute inset-x-0 bottom-0 p-4 text-sm font-medium text-primary-fg sm:p-5">
+            {photo.caption}
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+
+  <!-- Compensa el desplazamiento de las columnas pares para que la sección
+       siguiente no quede pegada a las fotos bajas. -->
+  <div class="hidden h-10 lg:block" aria-hidden="true"></div>
 </section>
