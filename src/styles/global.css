@@ -27,15 +27,60 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", ui-serif, Georgia, serif;
 
+  /* Escala display: el titular del hero y los precios necesitan salirse
+     del rango 16-60px en el que vivía todo el documento. */
+  --text-display: clamp(2.75rem, 8.5vw, 6.5rem);
+  --text-display--line-height: 0.94;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-headline: clamp(2rem, 4.5vw, 3.25rem);
+  --text-headline--line-height: 1.06;
+  --text-headline--letter-spacing: -0.025em;
+
+  --text-figure: clamp(2.25rem, 3.5vw, 3rem);
+  --text-figure--line-height: 1;
+  --text-figure--letter-spacing: -0.03em;
+
   --radius-sm: 0.5rem;
   --radius-md: 0.875rem;
   --radius-lg: 1.5rem;
   --radius-xl: 2rem;
 
-  --shadow-soft: 0 1px 2px rgb(36 31 28 / 0.04), 0 8px 24px -14px rgb(36 31 28 / 0.14);
-  --shadow-lift: 0 2px 6px rgb(36 31 28 / 0.06), 0 24px 44px -22px rgb(36 31 28 / 0.24);
+  /* Sombras teñidas de café en vez de negro: sobre un fondo crema el negro
+     puro a baja opacidad no se percibe como sombra, se percibe como suciedad. */
+  --shadow-soft: 0 1px 2px rgb(74 48 33 / 0.05), 0 10px 24px -12px rgb(74 48 33 / 0.16);
+  --shadow-lift: 0 2px 6px rgb(74 48 33 / 0.07), 0 28px 50px -20px rgb(74 48 33 / 0.30);
+  --shadow-float: 0 4px 12px rgb(74 48 33 / 0.09), 0 44px 80px -28px rgb(74 48 33 / 0.38);
+
+  /* Ritmo vertical por peso de sección, en lugar de py-20 en todas. */
+  --spacing-band-sm: 3.5rem;
+  --spacing-band-md: 5.5rem;
+  --spacing-band-lg: 8rem;
 
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Deriva lenta de la foto del hero */
+  --animate-drift: drift 32s ease-in-out infinite alternate;
+  @keyframes drift {
+    from { transform: scale(1.06) translate3d(-1.2%, 0.6%, 0); }
+    to   { transform: scale(1.14) translate3d(1.2%, -0.6%, 0); }
+  }
+
+  /* Entrada por línea del titular: el bloque sube desde detrás de su máscara */
+  --animate-unmask: unmask 1.1s var(--ease-out-soft) both;
+  @keyframes unmask {
+    from { transform: translate3d(0, 105%, 0); }
+    to   { transform: none; }
+  }
+
+  /* Indicador de scroll: baja y se desvanece, en vez del rebote de Tailwind */
+  --animate-sink: sink 2.4s var(--ease-out-soft) infinite;
+  @keyframes sink {
+    0%   { transform: translateY(-30%); opacity: 0; }
+    35%  { opacity: 1; }
+    70%  { transform: translateY(45%); opacity: 0; }
+    100% { transform: translateY(45%); opacity: 0; }
+  }
 }
 
 @layer base {
@@ -106,6 +151,33 @@
     content: "";
     @apply h-px w-6 bg-primary/40;
   }
+
+  /* Máscara por línea: el hijo se anima desde abajo y el padre lo recorta,
+     así el texto aparece "desde detrás" de su propia línea base. */
+  .line-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  /* Grano fino sobre los fondos planos. Sin él, las superficies de color
+     sólido se leen como vectores; con él, como papel. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+  }
+
+  /* Igual que .grain pero para fondos oscuros, donde multiply no funciona. */
+  .grain-dark::after {
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+  }
 }
 
 /* Aparición al hacer scroll — solo se activa si hay JS,
@@ -134,10 +206,13 @@
     transition: none;
   }
 
+  /* Las animaciones infinitas (drift, sink) no deben repetirse: sin
+     iteration-count seguirían corriendo en bucle a 0.01ms. */
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

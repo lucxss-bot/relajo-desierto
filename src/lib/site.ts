@@ -5,17 +5,10 @@
  */
 
 /**
- * PENDIENTE — coordenadas reales del acceso.
- * La dirección con nombre de pasaje y parcela no existe en Google Maps, así que
- * el enlace "Cómo llegar" se arma con estas coordenadas.
- *
- * Para obtenerlas: abre Google Maps en el celular estando en la entrada del
- * lugar, mantén pulsado el punto exacto hasta que salga el pin rojo, y copia
- * los dos números que aparecen arriba (ej. -27.318452, -70.401237).
- *
- * Mientras tanto apuntan al centro de Chamonate, que NO es la ubicación exacta.
+ * Coordenadas del acceso. La dirección con nombre de pasaje y parcela no
+ * existe en Google Maps, así que el enlace "Cómo llegar" se arma con estas.
  */
-const geo = { lat: -27.2833, lng: -70.4167, esExacta: false };
+const geo = { lat: -27.2857486, lng: -70.4503779 };
 
 export const site = {
   name: "Relajo Desierto",
