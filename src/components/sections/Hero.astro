@@ -5,99 +5,118 @@ import Icon from "../ui/Icon.astro";
 import atardecer from "../../assets/fotos/atardecer-panoramica.jpg";
 
 interface Props {
-  headline?: string;
+  /** El eslogan de la marca, partido en las líneas con las que se compone. */
+  displayLines?: string[];
   subheadline?: string;
 }
 
 const {
-  headline = "Tinaja y jacuzzi bajo el cielo del Atacama",
-  subheadline = "Agua caliente, silencio y estrellas a minutos de Copiapó. Para dos personas o para seis, por unas horas o con noche incluida.",
+  displayLines = ["Donde comienza", "tu descanso"],
+  subheadline = "Tinaja hasta 6 personas o jacuzzi hasta 4, con tabla, pizzetas y espumante. A minutos de Copiapó, en pleno desierto de Atacama.",
 } = Astro.props;
 
 const cta = whatsappLink(`Hola ${site.name}! Quiero consultar disponibilidad.`);
 
-const highlights = ["Tinaja hasta 6 personas", "Jacuzzi hasta 4", "Con o sin alojamiento"];
+const highlights = ["Tinaja hasta 6", "Jacuzzi hasta 4", "Con o sin alojamiento"];
 ---
 
 <section
-  class="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden"
+  class="grain grain-dark relative isolate flex min-h-[calc(100svh-4rem)] items-end overflow-hidden"
   data-on-dark
 >
-  <!-- Foto de fondo -->
+  <!-- Foto de fondo. La deriva lenta evita que la imagen se lea como un fondo fijo. -->
   <Image
     src={atardecer}
     alt="Atardecer sobre las cabañas de adobe de Relajo Desierto, en el desierto de Atacama"
-    class="absolute inset-0 -z-20 size-full object-cover"
+    class="absolute inset-0 -z-20 size-full origin-center object-cover animate-drift"
     widths={[640, 960, 1280]}
     sizes="100vw"
     loading="eager"
     fetchpriority="high"
   />
 
-  <!-- Velo oscuro para que el texto se lea sobre la foto -->
-  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink/80 via-ink/55 to-ink/85" aria-hidden="true"></div>
-
-  <div class="mx-auto w-full max-w-3xl px-5 py-20 text-center sm:px-6">
-    <p class="eyebrow justify-center !text-primary-fg/80 [&::before]:bg-primary-fg/40" data-reveal>
-      <Icon name="pin" class="size-3.5" />
-      {site.address.locality} · {site.address.city} · {site.address.region}
-    </p>
-
-    <h1 class="mt-6 text-primary-fg" data-reveal style="transition-delay: 80ms">
-      {headline}
-    </h1>
-
-    <p
-      class="mx-auto mt-6 max-w-xl text-lg text-primary-fg/85 sm:text-xl"
-      data-reveal
-      style="transition-delay: 160ms"
-    >
-      {subheadline}
-    </p>
-
-    <div
-      class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
-      data-reveal
-      style="transition-delay: 240ms"
-    >
-      <a
-        href={cta}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-7 py-3.5 text-base font-medium text-primary-fg shadow-lift transition-all duration-300 hover:bg-primary-deep active:scale-[0.98] sm:w-auto"
-      >
-        <Icon name="whatsapp" class="size-5" />
-        Reservar por WhatsApp
-      </a>
-      <a
-        href="#experiencias"
-        class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary-fg/35 bg-primary-fg/10 px-7 py-3.5 text-base font-medium text-primary-fg backdrop-blur-sm transition-colors hover:bg-primary-fg/20 sm:w-auto"
-      >
-        Ver experiencias
-      </a>
-    </div>
-
-    <ul
-      class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-sm text-primary-fg/80"
-      data-reveal
-      style="transition-delay: 320ms"
-    >
-      {
-        highlights.map((item) => (
-          <li class="inline-flex items-center gap-1.5">
-            <Icon name="check" class="size-4 text-primary-fg/60" />
-            {item}
-          </li>
-        ))
-      }
-    </ul>
+  <!-- Dos velos cruzados en vez de uno: el vertical asienta el texto contra
+       el borde inferior, el horizontal lo despega del lado derecho. -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/92 via-ink/58 to-ink/28" aria-hidden="true"></div>
+  <div
+    class="absolute inset-0 -z-10 bg-gradient-to-r from-ink/75 via-ink/25 to-transparent"
+    aria-hidden="true"
+  >
   </div>
 
-  <a
-    href="#experiencias"
-    class="absolute bottom-4 left-1/2 z-10 hidden size-11 -translate-x-1/2 items-center justify-center text-primary-fg/60 transition-colors hover:text-primary-fg sm:flex"
-    aria-label="Ir a las experiencias"
+  <div class="mx-auto w-full max-w-6xl px-5 pb-band-md pt-32 sm:px-6">
+    <div class="max-w-3xl">
+      <p class="eyebrow !text-primary-fg/75 [&::before]:bg-primary-fg/40" data-reveal>
+        <Icon name="pin" class="size-3.5" />
+        {site.address.locality} · {site.address.city}
+      </p>
+
+      <!-- leading y tracking explícitos: el h1 de @layer base fija --tw-leading
+           y --tw-tracking, y text-display los lee como fallback, así que sin
+           esto el titular se queda con la métrica del h1 normal. -->
+      <h1
+        class="mt-7 font-display text-display font-semibold leading-[0.94] tracking-[-0.035em] text-primary-fg"
+      >
+        {
+          displayLines.map((line, i) => (
+            <span class="line-mask">
+              <span class="block animate-unmask" style={`animation-delay: ${120 + i * 110}ms`}>
+                {line}
+              </span>
+            </span>
+          ))
+        }
+      </h1>
+
+      <p
+        class="mt-8 max-w-xl text-lg text-primary-fg/80 sm:text-xl"
+        data-reveal
+        style="transition-delay: 380ms"
+      >
+        {subheadline}
+      </p>
+
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center" data-reveal style="transition-delay: 460ms">
+        <a
+          href={cta}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2.5 rounded-full bg-primary px-8 py-4 text-base font-medium text-primary-fg shadow-float transition-all duration-300 ease-out-soft hover:bg-primary-deep hover:shadow-lift active:scale-[0.98]"
+        >
+          <Icon name="whatsapp" class="size-5" />
+          Reservar por WhatsApp
+        </a>
+        <a
+          href="#experiencias"
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-primary-fg/30 px-8 py-4 text-base font-medium text-primary-fg backdrop-blur-sm transition-colors duration-300 hover:border-primary-fg/60 hover:bg-primary-fg/10"
+        >
+          Ver experiencias
+        </a>
+      </div>
+
+      <ul
+        class="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-primary-fg/75"
+        data-reveal
+        style="transition-delay: 540ms"
+      >
+        {
+          highlights.map((item, i) => (
+            <>
+              {i > 0 && (
+                <li class="hidden h-3 w-px bg-primary-fg/25 sm:block" aria-hidden="true" />
+              )}
+              <li>{item}</li>
+            </>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <span
+    class="absolute bottom-5 right-5 hidden h-12 w-px overflow-hidden bg-primary-fg/15 sm:block sm:right-8"
+    aria-hidden="true"
   >
-    <Icon name="arrow-down" class="size-5 animate-bounce" />
-  </a>
+    <span class="block h-1/2 w-px bg-primary-fg/70 animate-sink"></span>
+  </span>
 </section>
