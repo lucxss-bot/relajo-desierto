@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
-import desayuno from "../../assets/fotos/desayuno.jpg";
-import tabla from "../../assets/fotos/tabla.jpg";
-import jardinNoche from "../../assets/fotos/jardin-noche.jpg";
-import nocheCopas from "../../assets/fotos/noche-copas.jpg";
+import tinajaAtardecer from "../../assets/fotos/tinaja-atardecer.jpg";
+import tinajaTotora from "../../assets/fotos/tinaja-totora.jpg";
+import copasNoche from "../../assets/fotos/copas-noche.jpg";
+import gato from "../../assets/fotos/gato.jpg";
 
 interface Photo {
   src: ImageMetadata;
@@ -19,30 +19,30 @@ interface Photo {
 
 const photos: Photo[] = [
   {
-    src: tabla,
-    alt: "Tabla de picoteo con quesos, frutas y espumante en Relajo Desierto",
-    caption: "La tabla que viene incluida",
+    src: tinajaAtardecer,
+    alt: "Tinaja de madera al atardecer, con espumante, una vela y la tabla servida",
+    caption: "La hora del atardecer",
     ratio: "aspect-[4/5]",
     offset: false,
   },
   {
-    src: desayuno,
-    alt: "Bandeja de desayuno con café, sándwiches y fruta fresca en la cabaña",
-    caption: "Desayuno en la cabaña",
+    src: tinajaTotora,
+    alt: "Tinaja bajo el techo de totora con la tabla de picoteo apoyada en el borde",
+    caption: "Bajo techo de totora",
     ratio: "aspect-[3/4]",
     offset: true,
   },
   {
-    src: nocheCopas,
-    alt: "Dos copas de espumante servidas de noche junto al sector de tinajas",
+    src: copasNoche,
+    alt: "Dos copas servidas de noche junto a la chimenea de la tinaja",
     caption: "Espumante, siempre",
     ratio: "aspect-[4/5]",
     offset: false,
   },
   {
-    src: jardinNoche,
-    alt: "Jardín de cactus y yucas del desierto iluminado de noche",
-    caption: "El desierto, de noche",
+    src: gato,
+    alt: "El gato de la casa sentado sobre un muro de adobe al anochecer",
+    caption: "El dueño de casa",
     ratio: "aspect-[3/4]",
     offset: true,
   },
