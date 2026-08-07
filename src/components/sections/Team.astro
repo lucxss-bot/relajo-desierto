@@ -22,6 +22,13 @@ const team: TeamMember[] = [
     role: "Mantención",
     bio: "Se encarga del agua, la temperatura y de que cada rincón esté impecable.",
   },
+  {
+    // Van juntos porque comparten el mismo rol: separarlos obligaría a
+    // inventarles una diferencia que no me contaron.
+    name: "Nicolás y Gonzalo",
+    role: "Desde la distancia",
+    bio: "No viven acá, pero son parte: aportan ideas desde lejos.",
+  },
 ];
 ---
 
@@ -33,10 +40,6 @@ const team: TeamMember[] = [
         <h2 class="mt-6 text-headline leading-[1.06] tracking-[-0.025em] text-fg">
           Una familia, un pedazo de desierto
         </h2>
-        <p class="mt-6 max-w-md text-lg text-fg-muted">
-          No somos un hotel ni un spa. Somos tres personas que preparan el agua, ponen la mesa y te dejan
-          tranquilo.
-        </p>
       </div>
 
       {/* Lista tipográfica en vez de tarjetas: evita repetir por cuarta vez
