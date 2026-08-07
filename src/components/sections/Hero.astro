@@ -7,17 +7,11 @@ import atardecer from "../../assets/fotos/atardecer-panoramica.jpg";
 interface Props {
   /** El eslogan de la marca, partido en las líneas con las que se compone. */
   displayLines?: string[];
-  subheadline?: string;
 }
 
-const {
-  displayLines = ["Donde comienza", "tu descanso"],
-  subheadline = "Tinaja o jacuzzi bajo el cielo del Atacama, a minutos de Copiapó. Con tabla, pizzetas y espumante.",
-} = Astro.props;
+const { displayLines = ["Donde comienza", "tu descanso"] } = Astro.props;
 
 const cta = whatsappLink(`Hola ${site.name}! Quiero consultar disponibilidad.`);
-
-const highlights = ["Tinaja hasta 6", "Jacuzzi hasta 4", "Con o sin alojamiento"];
 ---
 
 <section
@@ -77,15 +71,7 @@ const highlights = ["Tinaja hasta 6", "Jacuzzi hasta 4", "Con o sin alojamiento"
         }
       </h1>
 
-      <p
-        class="mt-8 max-w-xl text-lg text-primary-fg/80 sm:text-xl"
-        data-reveal
-        style="transition-delay: 380ms"
-      >
-        {subheadline}
-      </p>
-
-      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center" data-reveal style="transition-delay: 460ms">
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center" data-reveal style="transition-delay: 380ms">
         <a
           href={cta}
           target="_blank"
@@ -104,22 +90,6 @@ const highlights = ["Tinaja hasta 6", "Jacuzzi hasta 4", "Con o sin alojamiento"
         </a>
       </div>
 
-      <ul
-        class="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-primary-fg/75"
-        data-reveal
-        style="transition-delay: 540ms"
-      >
-        {
-          highlights.map((item, i) => (
-            <>
-              {i > 0 && (
-                <li class="hidden h-3 w-px bg-primary-fg/25 sm:block" aria-hidden="true" />
-              )}
-              <li>{item}</li>
-            </>
-          ))
-        }
-      </ul>
     </div>
   </div>
 

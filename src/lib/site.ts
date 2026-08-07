@@ -15,12 +15,11 @@ export const site = {
   slogan: "Donde comienza tu descanso",
   tagline: "Tinaja, jacuzzi y cabaña en el desierto de Atacama",
   description:
-    "Tinaja hasta 6 personas o jacuzzi hasta 4, con tabla de picoteo, pizzetas y espumante. Con o sin alojamiento en cabaña, a minutos de Copiapó.",
+    "Tinaja hasta 6 personas o jacuzzi para 2, con tabla dulce y salada, pizzetas y bebestible a elección. Con o sin alojamiento en cabaña, a minutos de Copiapó.",
 
-  // OJO: reemplazar por el número real antes de difundir el sitio.
-  whatsapp: "56912345678",
-  phoneDisplay: "+56 9 1234 5678",
-  phoneHref: "tel:+56912345678",
+  whatsapp: "56998261732",
+  phoneDisplay: "+56 9 9826 1732",
+  phoneHref: "tel:+56998261732",
 
   instagram: "https://instagram.com/relajodesierto",
   instagramHandle: "@relajodesierto",

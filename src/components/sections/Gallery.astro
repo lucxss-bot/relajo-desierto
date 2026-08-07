@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 import tinajaAtardecer from "../../assets/fotos/tinaja-atardecer.jpg";
-import jacuzziQuincho from "../../assets/fotos/jacuzzi-quincho.jpg";
+import jacuzziBurbujas from "../../assets/fotos/jacuzzi.jpg";
 import copasNoche from "../../assets/fotos/copas-noche.jpg";
 import gato from "../../assets/fotos/gato.jpg";
 
@@ -26,16 +26,16 @@ const photos: Photo[] = [
     offset: false,
   },
   {
-    src: jacuzziQuincho,
-    alt: "Jacuzzi dentro del quincho de madera, con luces cálidas y la mesa servida",
-    caption: "El jacuzzi bajo techo",
+    src: jacuzziBurbujas,
+    alt: "Jacuzzi con hidroburbujas y la mesa servida con tabla y bebestible",
+    caption: "Las burbujas del jacuzzi",
     ratio: "aspect-[3/4]",
     offset: true,
   },
   {
     src: copasNoche,
     alt: "Dos copas servidas de noche junto a la chimenea de la tinaja",
-    caption: "Espumante, siempre",
+    caption: "La botella que elijas",
     ratio: "aspect-[4/5]",
     offset: false,
   },
@@ -53,12 +53,9 @@ const photos: Photo[] = [
   <!-- Cabecera contenida, fotos a sangre completa: la tensión entre las dos
        anchuras es lo que rompe el ritmo de contenedor de todas las secciones. -->
   <div class="mx-auto max-w-6xl px-5 sm:px-6">
-    <div class="flex flex-wrap items-end justify-between gap-x-10 gap-y-4" data-reveal>
-      <div>
-        <p class="eyebrow">El lugar</p>
-        <h2 class="mt-6 text-headline leading-[1.06] tracking-[-0.025em] text-fg">Así se ve por acá</h2>
-      </div>
-      <p class="max-w-sm text-fg-muted">Fotos del lugar, sin retoque.</p>
+    <div data-reveal>
+      <p class="eyebrow">El lugar</p>
+      <h2 class="mt-6 text-headline leading-[1.06] tracking-[-0.025em] text-fg">Así se ve por acá</h2>
     </div>
   </div>
 
