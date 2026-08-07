@@ -23,11 +23,14 @@ const team: TeamMember[] = [
     bio: "Se encarga del agua, la temperatura y de que cada rincón esté impecable.",
   },
   {
-    // Van juntos porque comparten el mismo rol: separarlos obligaría a
-    // inventarles una diferencia que no me contaron.
-    name: "Nicolás y Gonzalo",
+    name: "Nicolás",
     role: "Desde la distancia",
-    bio: "No viven acá, pero son parte: aportan ideas desde lejos.",
+    bio: "No vive en el desierto, pero aporta ideas desde lejos.",
+  },
+  {
+    name: "Gonzalo",
+    role: "Desde la distancia",
+    bio: "Tampoco vive acá, y aporta igual que su hermano.",
   },
 ];
 ---
@@ -45,17 +48,19 @@ const team: TeamMember[] = [
       {/* Lista tipográfica en vez de tarjetas: evita repetir por cuarta vez
           la misma receta de borde + sombra + fondo blanco, y no finge tener
           fotos del equipo con avatares de inicial sobre degradado. */}
+      <!-- En el teléfono cada fila se apila: con nombre y cargo en la misma
+           línea, los nombres largos aprietan el cargo y rompen el ritmo. -->
       <ul class="lg:pt-2">
         {
           team.map((member, i) => (
             <li
-              class="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-1 border-t border-border py-6 first:border-t-0 first:pt-0 sm:gap-x-8"
+              class="grid grid-cols-1 gap-y-1 border-t border-border py-6 first:border-t-0 first:pt-0 sm:grid-cols-[auto_1fr] sm:items-baseline sm:gap-x-8"
               data-reveal
               style={`transition-delay: ${i * 90}ms`}
             >
               <h3 class="text-2xl text-fg">{member.name}</h3>
               <p class="text-xs font-semibold uppercase tracking-[0.14em] text-primary-deep">{member.role}</p>
-              <p class="col-start-2 mt-1 text-fg-muted">{member.bio}</p>
+              <p class="mt-1 text-fg-muted sm:col-start-2">{member.bio}</p>
             </li>
           ))
         }
