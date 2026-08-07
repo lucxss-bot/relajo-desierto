@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 import { site } from "../lib/site";
 
 interface Props {
@@ -79,6 +80,11 @@ const schema = {
     <title>{title}</title>
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+    {/* Cuenta visitas sin cookies ni datos personales, así que no necesita
+        aviso de consentimiento. Hay que activarlo además en el panel de
+        Vercel: Analytics -> Enable. */}
+    <Analytics />
   </head>
   <body>
     <a
