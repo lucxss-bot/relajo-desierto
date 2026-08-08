@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://relajo-desierto.vercel.app',
+  site: 'https://relajodesierto.cl',
   vite: {
     plugins: [tailwindcss()]
   },

@@ -5,11 +5,12 @@ import Icon from "../ui/Icon.astro";
 import atardecer from "../../assets/fotos/atardecer-panoramica.jpg";
 
 interface Props {
-  /** El eslogan de la marca, partido en las líneas con las que se compone. */
+  /** El nombre de la marca, partido en las líneas con las que se compone. */
   displayLines?: string[];
+  slogan?: string;
 }
 
-const { displayLines = ["Donde comienza", "tu descanso"] } = Astro.props;
+const { displayLines = ["Relajo", "Desierto"], slogan = site.slogan } = Astro.props;
 
 const cta = whatsappLink(`Hola ${site.name}! Quiero consultar disponibilidad.`);
 ---
@@ -71,7 +72,15 @@ const cta = whatsappLink(`Hola ${site.name}! Quiero consultar disponibilidad.`);
         }
       </h1>
 
-      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center" data-reveal style="transition-delay: 380ms">
+      <p
+        class="mt-6 font-display text-xl text-primary-fg/85 sm:text-2xl"
+        data-reveal
+        style="transition-delay: 380ms"
+      >
+        {slogan}
+      </p>
+
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center" data-reveal style="transition-delay: 460ms">
         <a
           href={cta}
           target="_blank"
