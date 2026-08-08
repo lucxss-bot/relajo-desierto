@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { clp, whatsappLink } from "../../lib/site";
+import { clp, site, whatsappLink } from "../../lib/site";
 import Icon from "../ui/Icon.astro";
 
 import fotoTinaja from "../../assets/fotos/tinaja-noche.jpg";
@@ -248,7 +248,7 @@ const wa = (nombre: string) =>
 
           <p class="mt-4 inline-flex items-center gap-2 text-sm text-fg-subtle">
             <Icon name="clock" class="size-4 shrink-0" />
-            Ingreso 16:00 · salida 12:00 del día siguiente
+            Ingreso {site.hours.cabanaIngreso} · salida {site.hours.cabanaSalida} del día siguiente
           </p>
 
           <ul class="mt-7 grid grid-cols-1 gap-x-8 gap-y-3 border-t border-border pt-7 sm:grid-cols-2">

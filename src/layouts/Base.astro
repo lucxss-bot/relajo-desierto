@@ -42,6 +42,12 @@ const schema = {
     latitude: site.geo.lat,
     longitude: site.geo.lng,
   },
+  // El ingreso y la salida de la cabaña no dependen de la estación, así que
+  // se pueden declarar. Los horarios de tinaja y jacuzzi sí cambian, y no
+  // sé las fechas exactas del cambio: prefiero no declararlos a declararlos
+  // mal, porque un horario equivocado en Google hace llegar gente cerrado.
+  checkinTime: site.hours.cabanaIngreso,
+  checkoutTime: site.hours.cabanaSalida,
   sameAs: [site.instagram],
   amenityFeature: [
     { "@type": "LocationFeatureSpecification", name: "Tinaja con hidromasaje", value: true },

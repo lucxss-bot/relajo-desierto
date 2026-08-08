@@ -131,17 +131,38 @@ const channels = [
       data-reveal
       style="transition-delay: 350ms"
     >
-      <div class="mx-auto flex max-w-xl flex-col items-center gap-5">
-        <div class="space-y-2 text-sm text-primary-fg/70">
-          <p class="inline-flex items-center justify-center gap-2">
-            <Icon name="pin" class="size-4 shrink-0 text-primary-fg/50" />
-            {site.address.full}
-          </p>
-          <p class="inline-flex items-center justify-center gap-2">
-            <Icon name="clock" class="size-4 shrink-0 text-primary-fg/50" />
-            {site.hours}
-          </p>
-        </div>
+      <div class="mx-auto flex max-w-xl flex-col items-center gap-6">
+        <p class="inline-flex items-center gap-2 text-sm text-primary-fg/70">
+          <Icon name="pin" class="size-4 shrink-0 text-primary-fg/50" />
+          {site.address.full}
+        </p>
+
+        {/* Dos horarios distintos: el del agua cambia con la estación y el de
+            la cabaña no. Juntarlos en una línea se leía como uno solo. */}
+        <dl class="grid w-full grid-cols-1 gap-x-10 gap-y-4 text-sm sm:grid-cols-2">
+          <div class="flex gap-2.5">
+            <Icon name="clock" class="mt-0.5 size-4 shrink-0 text-primary-fg/50" />
+            <div>
+              <dt class="font-medium text-primary-fg">Tinaja y jacuzzi</dt>
+              <dd class="mt-1 text-primary-fg/70">
+                Todos los días<br />
+                Invierno {site.hours.aguaInvierno}<br />
+                Verano {site.hours.aguaVerano}
+              </dd>
+            </div>
+          </div>
+
+          <div class="flex gap-2.5">
+            <Icon name="cabana" class="mt-0.5 size-4 shrink-0 text-primary-fg/50" />
+            <div>
+              <dt class="font-medium text-primary-fg">Cabaña</dt>
+              <dd class="mt-1 text-primary-fg/70">
+                Todo el año<br />
+                Ingreso {site.hours.cabanaIngreso}, salida {site.hours.cabanaSalida} del día siguiente
+              </dd>
+            </div>
+          </div>
+        </dl>
 
         {/* La dirección por sí sola no se encuentra en Maps: son parcelas.
             Por eso el botón lleva a las coordenadas exactas. */}

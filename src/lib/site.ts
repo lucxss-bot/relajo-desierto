@@ -37,7 +37,13 @@ export const site = {
   /** Abre Google Maps directamente en modo "cómo llegar" hacia el punto. */
   mapsUrl: `https://www.google.com/maps/dir/?api=1&destination=${geo.lat},${geo.lng}`,
 
-  hours: "Todos los días, 10:00 a 23:00",
+  /** Tinaja y jacuzzi cambian con la estación; la cabaña no. */
+  hours: {
+    aguaInvierno: "17:00 a 21:00",
+    aguaVerano: "18:00 a 22:00",
+    cabanaIngreso: "16:00",
+    cabanaSalida: "12:00",
+  },
 } as const;
 
 /** Link de WhatsApp con mensaje pre-escrito. */
